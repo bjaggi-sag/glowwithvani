@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7efe2"/>
+      <stop offset="100%" stop-color="#dcc4a5"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1100" fill="url(#bg)"/>
+  <rect x="70" y="70" width="760" height="960" rx="28" stroke="#8a693f" stroke-opacity="0.5" stroke-width="2"/>
+  <text x="450" y="510" fill="#5e4930" font-size="58" text-anchor="middle" font-family="Georgia, serif">GlowWithVani</text>
+  <text x="450" y="580" fill="#8a693f" font-size="36" text-anchor="middle" font-family="Arial, sans-serif">Bridal 1</text>
+</svg>

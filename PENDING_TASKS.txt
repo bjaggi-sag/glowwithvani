@@ -1,0 +1,44 @@
+GlowWithVani - Pending Tasks for Deployment
+
+1) Add real brand assets
+- Place final logo at: public/brand/logo.png
+- Optional founder photo at: public/brand/gurvani.png
+
+2) Configure contact form (required)
+- Open src/components/ContactForm.tsx
+- Replace Formspree placeholder endpoint:
+  https://formspree.io/f/your-form-id
+- Use your real Formspree form endpoint
+
+3) Verify local production build
+- Run: npm run build
+- Confirm build completes without errors
+
+4) Commit and push to main branch
+- Push all current project changes to GitHub
+- This triggers GitHub Actions deploy workflow
+
+5) Enable GitHub Pages deployment
+- Repo Settings -> Pages
+- Set Source to: GitHub Actions
+
+6) Configure Namecheap DNS for custom domain (glowwithvani.com)
+- Keep public/CNAME as: glowwithvani.com
+- Add A records for root (@) to GitHub Pages IPs
+- Add CNAME record for www -> <your-github-username>.github.io
+
+7) Connect custom domain in GitHub Pages
+- In GitHub Pages settings, set custom domain to glowwithvani.com
+- Enable HTTPS once DNS is fully propagated
+
+8) Final live QA after deploy
+- Test pages:
+  /
+  /portfolio
+  /contact
+- Submit contact form once to confirm Formspree receives inquiries
+- Validate mobile layout from Instagram traffic flow
+
+Optional polish
+- Add favicon/app icons from brand logo
+- Add social OG image for better Instagram/WhatsApp link previews
