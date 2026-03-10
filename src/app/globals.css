@@ -360,6 +360,9 @@ main {
   font-family: var(--font-serif), serif;
   font-size: 1.3rem;
   line-height: 1.2;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  text-wrap: balance;
 }
 
 .price-value {
@@ -407,6 +410,13 @@ main {
 
 .pricing-notes .button {
   margin-top: 0.85rem;
+}
+
+.pricing-actions {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
 }
 
 .split {

@@ -39,9 +39,14 @@ export function ServicesPricingSection() {
           <p className="pricing-meta-note">
             For custom bookings, bridal parties, or special requests, please get in touch.
           </p>
-          <Link href="/contact" className="button">
-            Request Booking
-          </Link>
+          <div className="pricing-actions">
+            <Link href="/contact" className="button">
+              Request Booking
+            </Link>
+            <a href="/downloads/glowwithvani-pricing.png" className="button secondary" download>
+              Download Prices
+            </a>
+          </div>
         </div>
       </Reveal>
     </section>
