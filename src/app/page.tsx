@@ -112,7 +112,6 @@ export default function HomePage() {
               <div>
                 <p className="founder-name">Gurvani Kaur</p>
                 <p className="founder-role">Founder, GlowWithVani</p>
-                <p className="founder-credential">Professionally trained by celebrity artist Sara Khan (India).</p>
               </div>
             </div>
           </div>
