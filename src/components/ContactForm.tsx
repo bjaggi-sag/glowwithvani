@@ -1,12 +1,18 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xqeyevdb";
-const FALLBACK_EMAIL = "hello@glowwithvani.com";
+const FALLBACK_EMAIL = "glowwithvani@gmail.com";
 
 export function ContactForm() {
   const [state, setState] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [minEventDate, setMinEventDate] = useState("");
+
+  useEffect(() => {
+    // Compute on the client to avoid timezone-related hydration mismatches.
+    setMinEventDate(new Date().toISOString().split("T")[0] ?? "");
+  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -56,7 +62,7 @@ export function ContactForm() {
       </label>
       <label>
         Event Date (optional)
-        <input type="date" name="eventDate" />
+        <input type="date" name="eventDate" min={minEventDate} />
       </label>
       <label>
         Message

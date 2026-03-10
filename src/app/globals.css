@@ -120,7 +120,10 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .brand {
@@ -150,14 +153,44 @@ main {
 }
 
 .nav {
-  display: flex;
-  gap: 0.95rem;
-  align-items: center;
+  display: none;
+  width: 100%;
+  padding: 0.4rem 0 0.2rem;
+  border-top: 1px solid var(--line);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
 }
 
 .nav a {
   font-size: 0.88rem;
   color: var(--muted);
+}
+
+.nav.open {
+  display: flex;
+}
+
+.nav-toggle {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.22rem;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  width: 1rem;
+  height: 1.5px;
+  background: var(--ink);
+  border-radius: 999px;
 }
 
 .nav a:hover {
@@ -528,6 +561,26 @@ main {
 @media (min-width: 768px) {
   .section {
     padding: 5.8rem 0;
+  }
+
+  .site-header .inner {
+    flex-wrap: nowrap;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav {
+    display: flex;
+    width: auto;
+    padding: 0;
+    border-top: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.95rem;
   }
 
   .hero-shell {
