@@ -22,7 +22,7 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="nav-toggle"
+          className={`nav-toggle${isOpen ? " open" : ""}`}
           aria-expanded={isOpen}
           aria-controls="primary-navigation"
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -33,7 +33,7 @@ export function SiteHeader() {
           <span />
         </button>
 
-        <nav id="primary-navigation" className={`nav ${isOpen ? "open" : ""}`} aria-label="Primary">
+        <nav id="primary-navigation" className={`nav${isOpen ? " open" : ""}`} aria-label="Primary">
           <Link href="/#about" onClick={closeMenu}>
             About
           </Link>

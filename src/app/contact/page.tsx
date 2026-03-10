@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ContactForm } from "@/components/ContactForm";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <main className="section">
-      <div className="container contact-layout">
+      <Reveal className="container contact-layout">
         <div>
           <SectionHeading
             kicker="Contact"
@@ -33,7 +34,7 @@ export default function ContactPage() {
           <p className="section-copy">Available for destination weddings and open to worldwide travel.</p>
         </div>
         <ContactForm />
-      </div>
+      </Reveal>
     </main>
   );
 }

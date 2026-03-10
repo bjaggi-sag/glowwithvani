@@ -5,24 +5,35 @@ import { FormEvent, useEffect, useState } from "react";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xqeyevdb";
 const FALLBACK_EMAIL = "glowwithvani@gmail.com";
 
+function getTodayLocalDate() {
+  const today = new Date();
+  today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  return today.toISOString().split("T")[0] ?? "";
+}
+
 export function ContactForm() {
   const [state, setState] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [minEventDate, setMinEventDate] = useState("");
 
   useEffect(() => {
-    // Compute on the client to avoid timezone-related hydration mismatches.
-    setMinEventDate(new Date().toISOString().split("T")[0] ?? "");
+    // Compute from the user's local timezone so mobile date pickers enforce the correct minimum date.
+    setMinEventDate(getTodayLocalDate());
   }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
+    const eventDate = String(formData.get("eventDate") ?? "");
+
+    if (eventDate && minEventDate && eventDate < minEventDate) {
+      setState("error");
+      return;
+    }
 
     if (FORMSPREE_ENDPOINT.includes("your-form-id")) {
       const name = String(formData.get("name") ?? "");
       const email = String(formData.get("email") ?? "");
-      const eventDate = String(formData.get("eventDate") ?? "");
       const message = String(formData.get("message") ?? "");
       const body = encodeURIComponent(
         `Name: ${name}\nEmail: ${email}\nEvent Date: ${eventDate || "Not provided"}\n\nMessage:\n${message}`

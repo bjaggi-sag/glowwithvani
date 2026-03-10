@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SectionHeading } from "@/components/SectionHeading";
 import { PortfolioGrid } from "@/components/PortfolioGrid";
 import { getPortfolioCategories, getPortfolioItems } from "@/data/portfolio";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -25,14 +26,14 @@ export default function PortfolioPage() {
 
   return (
     <main className="section">
-      <div className="container">
+      <Reveal className="container">
         <SectionHeading
           kicker="Portfolio"
           title="Curated makeup looks"
           copy="Use filters to browse by style category."
         />
         <PortfolioGrid items={portfolioItems} categories={portfolioCategories} />
-      </div>
+      </Reveal>
     </main>
   );
 }

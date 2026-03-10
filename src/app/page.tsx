@@ -7,6 +7,7 @@ import { ServicesPricingSection } from "@/components/ServicesPricingSection";
 import { InstagramIcon } from "@/components/InstagramIcon";
 import { getPortfolioCategories, getPortfolioItems } from "@/data/portfolio";
 import { services } from "@/data/services";
+import { Reveal } from "@/components/Reveal";
 
 const processSteps = [
   "Share your event details and preferred look.",
@@ -41,7 +42,7 @@ export default function HomePage() {
     <main>
       <section className="hero section">
         <div className="container">
-          <div className="hero-shell card">
+          <Reveal className="hero-shell card">
             <div className="hero-logo-wrap" aria-hidden="true">
               <Image src="/brand/logo.png" alt="GlowWithVani brand mark" width={520} height={520} className="hero-logo" />
             </div>
@@ -62,12 +63,12 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="section" id="portfolio-preview">
-        <div className="container">
+        <Reveal className="container">
           <SectionHeading
             kicker="Featured Work"
             title="Portfolio Preview"
@@ -79,13 +80,13 @@ export default function HomePage() {
               Explore Full Portfolio
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <ServicesPricingSection />
 
       <section className="section" id="about">
-        <div className="container split card about-card">
+        <Reveal className="container split card about-card">
           <div>
             <SectionHeading
               kicker="About"
@@ -115,11 +116,11 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <section className="section">
-        <div className="container">
+        <Reveal className="container">
           <SectionHeading kicker="How It Works" title="Simple booking process" />
           <ol className="steps">
             {processSteps.map((step) => (
@@ -128,11 +129,11 @@ export default function HomePage() {
               </li>
             ))}
           </ol>
-        </div>
+        </Reveal>
       </section>
 
       <section className="section instagram">
-        <div className="container card instagram-card">
+        <Reveal className="container card instagram-card">
           <SectionHeading
             kicker="Instagram"
             title="Follow the latest glam"
@@ -147,7 +148,7 @@ export default function HomePage() {
             <InstagramIcon className="instagram-icon" />
             <span>Visit GlowWithVanii</span>
           </a>
-        </div>
+        </Reveal>
       </section>
 
       <script

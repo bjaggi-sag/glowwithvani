@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { SectionHeading } from "@/components/SectionHeading";
 import { services, servicePricingNotes } from "@/data/services";
+import { Reveal } from "@/components/Reveal";
 
 export function ServicesPricingSection() {
   return (
     <section className="section" id="services">
-      <div className="container">
+      <Reveal className="container">
         <SectionHeading
           kicker="Services"
           title="Services"
@@ -42,7 +43,7 @@ export function ServicesPricingSection() {
             Request Booking
           </Link>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

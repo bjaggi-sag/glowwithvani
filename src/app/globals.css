@@ -21,6 +21,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans), sans-serif;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -45,6 +46,17 @@ main {
 
 .section {
   padding: 4rem 0;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section-title {
@@ -153,13 +165,19 @@ main {
 }
 
 .nav {
-  display: none;
+  display: flex;
   width: 100%;
-  padding: 0.4rem 0 0.2rem;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
   border-top: 1px solid var(--line);
   flex-direction: column;
   align-items: flex-start;
   gap: 0.9rem;
+  transform: translateY(-0.35rem);
+  transition: max-height 0.28s ease, opacity 0.22s ease, padding 0.22s ease, transform 0.22s ease;
+  pointer-events: none;
 }
 
 .nav a {
@@ -168,7 +186,11 @@ main {
 }
 
 .nav.open {
-  display: flex;
+  max-height: 16rem;
+  opacity: 1;
+  padding: 0.55rem 0 0.2rem;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .nav-toggle {
@@ -191,6 +213,19 @@ main {
   height: 1.5px;
   background: var(--ink);
   border-radius: 999px;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(0.23rem) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-0.23rem) rotate(-45deg);
 }
 
 .nav a:hover {
@@ -576,11 +611,17 @@ main {
   .nav {
     display: flex;
     width: auto;
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
     padding: 0;
     border-top: 0;
     flex-direction: row;
     align-items: center;
     gap: 0.95rem;
+    transform: none;
+    transition: none;
+    pointer-events: auto;
   }
 
   .hero-shell {
@@ -621,6 +662,22 @@ main {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal.is-visible,
+  .nav,
+  .nav-toggle span,
+  .button,
+  .pricing-card {
+    transition: none;
+    transform: none;
   }
 }
 
