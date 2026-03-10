@@ -1,16 +1,37 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { SectionHeading } from "@/components/SectionHeading";
 import { PortfolioGrid } from "@/components/PortfolioGrid";
 import { ServicesPricingSection } from "@/components/ServicesPricingSection";
 import { InstagramIcon } from "@/components/InstagramIcon";
 import { getPortfolioCategories, getPortfolioItems } from "@/data/portfolio";
+import { services } from "@/data/services";
 
 const processSteps = [
   "Share your event details and preferred look.",
   "Receive a personalized booking confirmation and prep notes.",
   "Glow-ready makeup session on your event day."
 ];
+
+export const metadata: Metadata = {
+  title: "Toronto Bridal Makeup Artist",
+  description:
+    "GlowWithVani is a Toronto-based luxury makeup artist serving the GTA for bridal makeup, event glam, editorial beauty, SFX looks, and destination weddings worldwide.",
+  keywords: [
+    "bridal makeup artist Toronto",
+    "Toronto bridal makeup",
+    "GTA makeup artist",
+    "luxury makeup artist GTA",
+    "destination wedding makeup artist",
+    "event makeup Toronto",
+    "editorial makeup artist Toronto",
+    "GlowWithVani"
+  ],
+  alternates: {
+    canonical: "/"
+  }
+};
 
 export default function HomePage() {
   const portfolioItems = getPortfolioItems();
@@ -29,7 +50,7 @@ export default function HomePage() {
               <h1 className="hero-brand-title">GlowWithVani</h1>
               <p className="hero-byline">By Gurvani Kaur</p>
               <p className="hero-summary">
-                Luxury glam tailored for bridal, editorial, event, and SFX moments with a soft, camera-ready finish.
+                Toronto bridal makeup artist services for weddings, events, editorial photoshoots, and soft glam with a polished, camera-ready finish.
               </p>
               <p className="hero-credentials">Founder-led artistry with a polished, modern, and timeless finish.</p>
               <div className="hero-actions">
@@ -134,11 +155,54 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "BeautySalon",
-            name: "GlowWithVani",
-            url: "https://glowwithvani.com",
-            areaServed: ["Toronto", "GTA", "Worldwide"],
-            sameAs: ["https://instagram.com/GlowWithVanii"]
+            "@graph": [
+              {
+                "@type": "BeautySalon",
+                "@id": "https://glowwithvani.com/#business",
+                name: "GlowWithVani",
+                url: "https://glowwithvani.com",
+                image: "https://glowwithvani.com/icon.png",
+                description:
+                  "Toronto-based luxury makeup artist serving the GTA for bridal beauty, event glam, editorial shoots, and destination weddings.",
+                areaServed: ["Toronto", "GTA", "Worldwide"],
+                sameAs: ["https://instagram.com/GlowWithVanii"],
+                brand: {
+                  "@type": "Brand",
+                  name: "GlowWithVani"
+                }
+              },
+              {
+                "@type": "Person",
+                "@id": "https://glowwithvani.com/#gurvani-kaur",
+                name: "Gurvani Kaur",
+                jobTitle: "Makeup Artist",
+                worksFor: {
+                  "@id": "https://glowwithvani.com/#business"
+                },
+                sameAs: ["https://instagram.com/GlowWithVanii"]
+              },
+              {
+                "@type": "OfferCatalog",
+                "@id": "https://glowwithvani.com/#services",
+                name: "GlowWithVani Makeup Services",
+                itemListElement: services.map((service) => ({
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: service.title,
+                    description: service.description,
+                    provider: {
+                      "@id": "https://glowwithvani.com/#business"
+                    }
+                  },
+                  priceSpecification: {
+                    "@type": "PriceSpecification",
+                    priceCurrency: "CAD",
+                    price: service.startingPrice.replace(/[^0-9]/g, "")
+                  }
+                }))
+              }
+            ]
           })
         }}
       />

@@ -23,26 +23,56 @@ export const metadata: Metadata = {
     template: "%s | GlowWithVani"
   },
   description:
-    "Luxury minimal makeup artistry in Toronto and the GTA for bridal, editorial, glam events, and SFX.",
+    "GlowWithVani is a Toronto-based luxury makeup artist serving the GTA for bridal makeup, event glam, editorial photoshoots, and destination weddings.",
   keywords: [
+    "bridal makeup artist Toronto",
     "Toronto makeup artist",
+    "makeup artist Toronto",
+    "luxury makeup artist Toronto",
     "GTA bridal makeup",
     "GlowWithVani",
+    "destination wedding makeup artist",
+    "party makeup artist Toronto",
     "editorial makeup Toronto",
     "SFX makeup artist"
   ],
+  applicationName: "GlowWithVani",
+  category: "beauty",
+  creator: "GlowWithVani",
+  publisher: "GlowWithVani",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    apple: [{ url: "/apple-icon.png", type: "image/png" }]
+  },
+  formatDetection: {
+    email: true,
+    address: true,
+    telephone: false
+  },
   openGraph: {
-    title: "GlowWithVani",
+    title: "GlowWithVani | Toronto Bridal & Luxury Makeup Artist",
     description:
-      "Luxury minimal makeup artistry in Toronto and the GTA for bridal, editorial, glam events, and SFX.",
+      "Toronto-based luxury makeup artist for bridal beauty, event glam, editorial shoots, and destination weddings.",
     type: "website",
-    url: "https://glowwithvani.com"
+    url: "https://glowwithvani.com",
+    siteName: "GlowWithVani",
+    locale: "en_CA",
+    images: [
+      {
+        url: "/icon.png",
+        width: 512,
+        height: 512,
+        alt: "GlowWithVani logo"
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "GlowWithVani",
+    title: "GlowWithVani | Toronto Bridal & Luxury Makeup Artist",
     description:
-      "Luxury minimal makeup artistry in Toronto and the GTA for bridal, editorial, glam events, and SFX."
+      "Toronto-based luxury makeup artist for bridal beauty, event glam, editorial shoots, and destination weddings.",
+    images: ["/icon.png"]
   },
   alternates: {
     canonical: "/"

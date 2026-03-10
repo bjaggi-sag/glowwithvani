@@ -4,7 +4,14 @@ import { ContactForm } from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Book your GlowWithVani makeup session in Toronto, the GTA, or for destination weddings worldwide.",
+  description: "Contact GlowWithVani to book bridal makeup, event glam, editorial makeup, or destination wedding makeup in Toronto, the GTA, and worldwide.",
+  keywords: [
+    "book makeup artist Toronto",
+    "contact bridal makeup artist Toronto",
+    "destination wedding makeup booking",
+    "GTA makeup artist inquiry",
+    "GlowWithVani contact"
+  ],
   alternates: {
     canonical: "/contact/"
   }
