@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { PortfolioGrid } from "@/components/PortfolioGrid";
 import { ServicesPricingSection } from "@/components/ServicesPricingSection";
 import { InstagramIcon } from "@/components/InstagramIcon";
+import { getPortfolioCategories, getPortfolioItems } from "@/data/portfolio";
 
 const processSteps = [
   "Share your event details and preferred look.",
@@ -12,6 +13,9 @@ const processSteps = [
 ];
 
 export default function HomePage() {
+  const portfolioItems = getPortfolioItems();
+  const portfolioCategories = getPortfolioCategories();
+
   return (
     <main>
       <section className="hero section">
@@ -48,7 +52,7 @@ export default function HomePage() {
             title="Portfolio Preview"
             copy="A quick look across bridal, editorial, soft glam, and SFX styles."
           />
-          <PortfolioGrid preview />
+          <PortfolioGrid items={portfolioItems} categories={portfolioCategories} preview />
           <div className="section-cta">
             <Link href="/portfolio" className="button secondary">
               Explore Full Portfolio

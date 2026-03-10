@@ -1,4 +1,6 @@
-export type PortfolioCategory = "Bridal" | "Editorial" | "Soft Glam" | "SFX";
+import { readdirSync, statSync } from "fs";
+import path from "path";
+export type PortfolioCategory = string;
 
 export type PortfolioItem = {
   id: string;
@@ -6,71 +8,77 @@ export type PortfolioItem = {
   category: PortfolioCategory;
   image: string;
   alt: string;
+  objectPosition?: string;
 };
 
-export const portfolioItems: PortfolioItem[] = [
-  {
-    id: "bridal-1",
-    title: "Classic Bridal Glow",
-    category: "Bridal",
-    image: "/portfolio/bridal/bridal-1.svg",
-    alt: "Bridal makeup look with warm nude tones"
-  },
-  {
-    id: "bridal-2",
-    title: "Soft Reception Glam",
-    category: "Bridal",
-    image: "/portfolio/bridal/bridal-2.svg",
-    alt: "Soft bridal reception glam"
-  },
-  {
-    id: "editorial-1",
-    title: "Bronzed Editorial",
-    category: "Editorial",
-    image: "/portfolio/editorial/editorial-1.svg",
-    alt: "Editorial makeup with bronzed finish"
-  },
-  {
-    id: "editorial-2",
-    title: "Studio Beauty Shot",
-    category: "Editorial",
-    image: "/portfolio/editorial/editorial-2.svg",
-    alt: "Photoshoot makeup for studio portrait"
-  },
-  {
-    id: "soft-glam-1",
-    title: "Evening Soft Glam",
-    category: "Soft Glam",
-    image: "/portfolio/soft-glam/soft-glam-1.svg",
-    alt: "Party soft glam makeup"
-  },
-  {
-    id: "soft-glam-2",
-    title: "Radiant Event Look",
-    category: "Soft Glam",
-    image: "/portfolio/soft-glam/soft-glam-2.svg",
-    alt: "Event makeup look with radiant skin"
-  },
-  {
-    id: "sfx-1",
-    title: "Fantasy SFX",
-    category: "SFX",
-    image: "/portfolio/sfx/sfx-1.svg",
-    alt: "Creative fantasy SFX makeup look"
-  },
-  {
-    id: "sfx-2",
-    title: "Character SFX",
-    category: "SFX",
-    image: "/portfolio/sfx/sfx-2.svg",
-    alt: "Character makeup effects look"
-  }
-];
+const supportedImageExtensions = [".jpg", ".jpeg", ".png", ".webp"] as const;
+const portfolioObjectPositions: Record<string, string> = {
+  "editorial/editorial-1": "center 22%",
+  "editorial/editorial-2": "center 18%",
+  "editorial/editorial-3": "center center",
+  "editorial/editorial4": "center center",
+  "theatre/theatre-2": "68% center"
+};
 
-export const portfolioCategories: ("All" | PortfolioCategory)[] = [
-  "All",
-  "Bridal",
-  "Editorial",
-  "Soft Glam",
-  "SFX"
-];
+function toTitleCase(value: string) {
+  return value
+    .split("-")
+    .filter(Boolean)
+    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+    .join(" ");
+}
+
+function compareNaturally(left: string, right: string) {
+  return left.localeCompare(right, undefined, { numeric: true, sensitivity: "base" });
+}
+
+function getPortfolioFolders() {
+  const rootDirectory = path.join(process.cwd(), "public", "portfolio");
+
+  try {
+    return readdirSync(rootDirectory)
+      .filter((folderName) => {
+        const folderPath = path.join(rootDirectory, folderName);
+        return statSync(folderPath).isDirectory();
+      })
+      .sort(compareNaturally);
+  } catch {
+    return [];
+  }
+}
+
+function readCategoryItems(category: PortfolioCategory, folder: string): PortfolioItem[] {
+  const directory = path.join(process.cwd(), "public", "portfolio", folder);
+
+  let fileNames: string[] = [];
+
+  try {
+    fileNames = readdirSync(directory)
+      .filter((fileName) => supportedImageExtensions.some((extension) => fileName.toLowerCase().endsWith(extension)))
+      .sort(compareNaturally);
+  } catch {
+    return [];
+  }
+
+  return fileNames.map((fileName, index) => {
+    const baseName = fileName.replace(/\.(jpg|jpeg|png|webp)$/i, "");
+    const objectPosition = portfolioObjectPositions[`${folder}/${baseName}`];
+
+    return {
+      id: `${folder}-${index + 1}`,
+      title: toTitleCase(baseName),
+      category,
+      image: `/portfolio/${folder}/${fileName}`,
+      alt: `${category} portfolio image ${index + 1}`,
+      objectPosition
+    };
+  });
+}
+
+export function getPortfolioItems(): PortfolioItem[] {
+  return getPortfolioFolders().flatMap((folder) => readCategoryItems(toTitleCase(folder), folder));
+}
+
+export function getPortfolioCategories(): ("All" | PortfolioCategory)[] {
+  return ["All", ...getPortfolioFolders().map((folder) => toTitleCase(folder))];
+}
