@@ -264,6 +264,13 @@ main {
   font-size: 0.9rem;
 }
 
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  align-items: center;
+}
+
 .hero {
   padding-top: 4.2rem;
 }
@@ -561,6 +568,148 @@ main {
   gap: 1rem;
 }
 
+.landing-page-hero {
+  padding-top: 4.2rem;
+}
+
+.landing-page-shell {
+  padding: 1.35rem;
+  display: grid;
+  gap: 1rem;
+  background: linear-gradient(180deg, var(--surface), var(--surface-soft));
+}
+
+.landing-page-hero-aside {
+  margin-top: 1rem;
+}
+
+.landing-page-hero-image-wrap {
+  overflow: hidden;
+  background: linear-gradient(180deg, #fffdf9, #f5ebdf);
+}
+
+.landing-page-hero-image {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.landing-page-title {
+  margin: 0;
+  max-width: 14ch;
+  font-family: var(--font-serif), serif;
+  font-size: clamp(2.1rem, 6vw, 4rem);
+  line-height: 0.98;
+  font-weight: 500;
+}
+
+.landing-page-intro {
+  margin: 1rem 0 0;
+  max-width: 60ch;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.landing-page-supporting {
+  margin: 0.8rem 0 0;
+  max-width: 60ch;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.landing-page-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.landing-page-card {
+  padding: 1.2rem;
+}
+
+.landing-page-list {
+  margin-top: 1rem;
+}
+
+.landing-page-coverage {
+  background: linear-gradient(180deg, var(--surface), var(--surface-soft));
+}
+
+.landing-page-bridal .landing-page-shell,
+.landing-page-bridal .landing-page-coverage {
+  background:
+    radial-gradient(circle at top right, rgba(160, 117, 71, 0.15), transparent 30%),
+    linear-gradient(180deg, #fff9f2, #f6ede3);
+}
+
+.landing-page-bridal .hero-tag,
+.landing-page-bridal .section-kicker,
+.landing-page-bridal .portfolio-meta p {
+  color: #9d5d34;
+}
+
+.bridal-story-card {
+  padding: 1.25rem;
+  display: grid;
+  gap: 1rem;
+  background:
+    linear-gradient(135deg, rgba(123, 47, 71, 0.05), transparent 38%),
+    linear-gradient(180deg, #fffaf5, #f5ebdf);
+}
+
+.bridal-story-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.bridal-story-tags span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.48rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(123, 47, 71, 0.14);
+  background: rgba(255, 250, 245, 0.78);
+  color: #7b2f47;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+
+.bridal-placeholder-grid {
+  margin-top: 1.2rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.bridal-placeholder-card {
+  overflow: hidden;
+  background: linear-gradient(180deg, #fffdf9, #f8f0e7);
+}
+
+.bridal-placeholder-media {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.bridal-placeholder-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bridal-placeholder-meta {
+  padding: 0.9rem;
+}
+
+.bridal-placeholder-meta p {
+  margin: 0;
+  color: #7b2f47;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.76rem;
+}
+
 .contact-form {
   padding: 1rem;
   display: grid;
@@ -666,6 +815,34 @@ main {
   .contact-layout {
     grid-template-columns: 1fr 1fr;
     align-items: start;
+  }
+
+  .landing-page-shell,
+  .landing-page-card {
+    padding: 1.6rem;
+  }
+
+  .landing-page-shell {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 1.4rem;
+  }
+
+  .landing-page-hero-aside {
+    margin-top: 0;
+  }
+
+  .landing-page-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bridal-story-card {
+    grid-template-columns: 1.5fr auto;
+    align-items: center;
+  }
+
+  .bridal-placeholder-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .site-footer .inner {

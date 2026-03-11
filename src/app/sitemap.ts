@@ -17,6 +17,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/contact/`,
       lastModified: new Date()
+    },
+    {
+      url: `${baseUrl}/toronto-bridal-makeup-artist/`,
+      lastModified: new Date()
+    },
+    {
+      url: `${baseUrl}/indian-bridal-makeup-toronto/`,
+      lastModified: new Date()
     }
   ];
 }
