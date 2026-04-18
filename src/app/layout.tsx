@@ -81,7 +81,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var key='glowwithvani-theme';var stored=localStorage.getItem(key);var theme=stored||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=theme;}catch(e){document.documentElement.dataset.theme='light';}})();`
+          }}
+        />
+      </head>
       <body className={`${sans.variable} ${serif.variable}`} suppressHydrationWarning>
         <SiteHeader />
         {children}

@@ -44,7 +44,8 @@ export default function HomePage() {
         <div className="container">
           <Reveal className="hero-shell card">
             <div className="hero-logo-wrap" aria-hidden="true">
-              <Image src="/brand/logo.png" alt="GlowWithVani brand mark" width={520} height={520} className="hero-logo" />
+              <Image src="/brand/logo.png" alt="GlowWithVani brand mark" width={520} height={520} className="hero-logo hero-logo-light" />
+              <Image src="/brand/logo-dark.png" alt="GlowWithVani brand mark" width={520} height={520} className="hero-logo hero-logo-dark" />
             </div>
             <div className="hero-copy-block">
               <p className="hero-tag">Toronto + GTA Makeup Artist</p>

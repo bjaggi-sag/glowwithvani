@@ -1,5 +1,6 @@
 :root {
   --bg: #faf7f2;
+  --page-bg: var(--bg);
   --surface: #ffffff;
   --surface-soft: #f6f1e8;
   --ink: #221b15;
@@ -7,7 +8,58 @@
   --accent: #8c6a42;
   --line: rgba(54, 43, 31, 0.14);
   --line-strong: rgba(54, 43, 31, 0.28);
+  --header-bg: rgba(250, 247, 242, 0.93);
+  --card-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  --header-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  --button-hover-bg: transparent;
+  --button-secondary-hover-bg: transparent;
+  --success: #1c6d3d;
+  --error: #922b2b;
+  --bridal-shell-bg:
+    radial-gradient(circle at top right, rgba(160, 117, 71, 0.15), transparent 30%),
+    linear-gradient(180deg, #fff9f2, #f6ede3);
+  --bridal-story-bg:
+    linear-gradient(135deg, rgba(123, 47, 71, 0.05), transparent 38%),
+    linear-gradient(180deg, #fffaf5, #f5ebdf);
+  --bridal-accent: #9d5d34;
+  --bridal-pill-border: rgba(123, 47, 71, 0.14);
+  --bridal-pill-bg: rgba(255, 250, 245, 0.78);
+  --bridal-pill-ink: #7b2f47;
+  --bridal-surface: linear-gradient(180deg, #fffdf9, #f8f0e7);
   --max-width: 1120px;
+}
+
+html[data-theme="dark"] {
+  --bg: #14110f;
+  --page-bg:
+    radial-gradient(circle at top left, rgba(214, 176, 109, 0.08), transparent 28%),
+    radial-gradient(circle at top right, rgba(81, 63, 45, 0.2), transparent 26%),
+    linear-gradient(180deg, #12100e 0%, #181310 45%, #110f0d 100%);
+  --surface: #1b1714;
+  --surface-soft: #241e19;
+  --ink: #f4ebdd;
+  --muted: #c4b8a6;
+  --accent: #d6b06d;
+  --line: rgba(214, 176, 109, 0.16);
+  --line-strong: rgba(214, 176, 109, 0.34);
+  --header-bg: rgba(20, 17, 15, 0.82);
+  --card-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+  --header-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+  --button-hover-bg: rgba(214, 176, 109, 0.08);
+  --button-secondary-hover-bg: rgba(214, 176, 109, 0.05);
+  --success: #63b784;
+  --error: #df8f8f;
+  --bridal-shell-bg:
+    radial-gradient(circle at top right, rgba(214, 176, 109, 0.13), transparent 34%),
+    linear-gradient(180deg, #1b1613, #221b16);
+  --bridal-story-bg:
+    linear-gradient(135deg, rgba(122, 54, 74, 0.14), transparent 38%),
+    linear-gradient(180deg, #191411, #241c16);
+  --bridal-accent: #d8a874;
+  --bridal-pill-border: rgba(214, 176, 109, 0.18);
+  --bridal-pill-bg: rgba(32, 25, 20, 0.84);
+  --bridal-pill-ink: #dbc29a;
+  --bridal-surface: linear-gradient(180deg, #191512, #241d17);
 }
 
 * {
@@ -18,10 +70,19 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  background: var(--page-bg);
+  background-color: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans), sans-serif;
   scroll-behavior: smooth;
+}
+
+html {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 a {
@@ -87,6 +148,7 @@ main {
   border: 1px solid var(--line);
   border-radius: 1rem;
   background: var(--surface);
+  box-shadow: var(--card-shadow);
 }
 
 .button {
@@ -106,6 +168,7 @@ main {
 .button:hover {
   border-color: var(--ink);
   color: var(--ink);
+  background: var(--button-hover-bg);
 }
 
 .button.secondary {
@@ -116,15 +179,17 @@ main {
 .button.secondary:hover {
   border-color: var(--ink);
   color: var(--ink);
+  background: var(--button-secondary-hover-bg);
 }
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(250, 247, 242, 0.93);
+  background: var(--header-bg);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
+  box-shadow: var(--header-shadow);
 }
 
 .site-header .inner {
@@ -160,8 +225,34 @@ main {
   filter: contrast(1.03) saturate(1.02);
 }
 
+html[data-theme="dark"] .brand-logo-nav {
+  filter: contrast(1.04) saturate(1.04) drop-shadow(0 1px 10px rgba(214, 176, 109, 0.08));
+}
+
+.brand-logo-dark,
+.hero-logo-dark {
+  display: none;
+}
+
+html[data-theme="dark"] .brand-logo-light,
+html[data-theme="dark"] .hero-logo-light {
+  display: none;
+}
+
+html[data-theme="dark"] .brand-logo-dark,
+html[data-theme="dark"] .hero-logo-dark {
+  display: block;
+}
+
 .brand-wordmark {
   line-height: 1;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-left: auto;
 }
 
 .nav {
@@ -206,6 +297,56 @@ main {
   align-items: center;
   gap: 0.22rem;
   cursor: pointer;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  padding: 0.38rem 0.55rem 0.38rem 0.42rem;
+  cursor: pointer;
+  transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.theme-toggle-track {
+  width: 2rem;
+  height: 1.1rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 34%, var(--surface));
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.14rem;
+}
+
+.theme-toggle-thumb {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transform: translateX(0);
+  transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+}
+
+html[data-theme="dark"] .theme-toggle-thumb {
+  transform: translateX(0.86rem);
+}
+
+.theme-toggle-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .nav-toggle span {
@@ -296,6 +437,10 @@ main {
   aspect-ratio: 1 / 1;
   object-fit: contain;
   filter: contrast(1.05) saturate(1.03);
+}
+
+html[data-theme="dark"] .hero-logo {
+  filter: contrast(1.04) saturate(1.04) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
 }
 
 .hero-copy-block {
@@ -585,7 +730,7 @@ main {
 
 .landing-page-hero-image-wrap {
   overflow: hidden;
-  background: linear-gradient(180deg, #fffdf9, #f5ebdf);
+  background: var(--bridal-surface);
 }
 
 .landing-page-hero-image {
@@ -637,24 +782,20 @@ main {
 
 .landing-page-bridal .landing-page-shell,
 .landing-page-bridal .landing-page-coverage {
-  background:
-    radial-gradient(circle at top right, rgba(160, 117, 71, 0.15), transparent 30%),
-    linear-gradient(180deg, #fff9f2, #f6ede3);
+  background: var(--bridal-shell-bg);
 }
 
 .landing-page-bridal .hero-tag,
 .landing-page-bridal .section-kicker,
 .landing-page-bridal .portfolio-meta p {
-  color: #9d5d34;
+  color: var(--bridal-accent);
 }
 
 .bridal-story-card {
   padding: 1.25rem;
   display: grid;
   gap: 1rem;
-  background:
-    linear-gradient(135deg, rgba(123, 47, 71, 0.05), transparent 38%),
-    linear-gradient(180deg, #fffaf5, #f5ebdf);
+  background: var(--bridal-story-bg);
 }
 
 .bridal-story-tags {
@@ -669,9 +810,9 @@ main {
   justify-content: center;
   padding: 0.48rem 0.8rem;
   border-radius: 999px;
-  border: 1px solid rgba(123, 47, 71, 0.14);
-  background: rgba(255, 250, 245, 0.78);
-  color: #7b2f47;
+  border: 1px solid var(--bridal-pill-border);
+  background: var(--bridal-pill-bg);
+  color: var(--bridal-pill-ink);
   font-size: 0.82rem;
   letter-spacing: 0.04em;
 }
@@ -684,7 +825,7 @@ main {
 
 .bridal-placeholder-card {
   overflow: hidden;
-  background: linear-gradient(180deg, #fffdf9, #f8f0e7);
+  background: var(--bridal-surface);
 }
 
 .bridal-placeholder-media {
@@ -704,7 +845,7 @@ main {
 
 .bridal-placeholder-meta p {
   margin: 0;
-  color: #7b2f47;
+  color: var(--bridal-pill-ink);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: 0.76rem;
@@ -730,6 +871,7 @@ main {
   border-radius: 0.7rem;
   padding: 0.75rem;
   background: var(--surface);
+  color: var(--ink);
   font: inherit;
 }
 
@@ -745,11 +887,11 @@ main {
 }
 
 .status.ok {
-  color: #1c6d3d;
+  color: var(--success);
 }
 
 .status.err {
-  color: #922b2b;
+  color: var(--error);
 }
 
 @media (min-width: 768px) {
@@ -781,6 +923,11 @@ main {
     transform: none;
     transition: none;
     pointer-events: auto;
+  }
+
+  .header-actions {
+    order: 2;
+    margin-left: 1rem;
   }
 
   .hero-shell {
