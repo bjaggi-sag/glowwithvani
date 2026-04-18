@@ -26,7 +26,7 @@ export default function PortfolioPage() {
 
   return (
     <main className="section">
-      <Reveal className="container">
+      <Reveal className="container" threshold={0.01} rootMargin="22% 0px -4% 0px">
         <SectionHeading
           kicker="Portfolio"
           title="Curated makeup looks"
