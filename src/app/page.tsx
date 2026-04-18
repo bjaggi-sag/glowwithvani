@@ -69,7 +69,7 @@ export default function HomePage() {
       </section>
 
       <section className="section" id="portfolio-preview">
-        <Reveal className="container">
+        <Reveal className="container" threshold={0.01} rootMargin="22% 0px -4% 0px">
           <SectionHeading
             kicker="Featured Work"
             title="Portfolio Preview"

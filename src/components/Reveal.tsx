@@ -4,10 +4,14 @@ import { useEffect, useRef, useState } from "react";
 
 export function Reveal({
   children,
-  className = ""
+  className = "",
+  threshold = 0.16,
+  rootMargin = "0px 0px -8% 0px"
 }: Readonly<{
   children: React.ReactNode;
   className?: string;
+  threshold?: number;
+  rootMargin?: string;
 }>) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -36,8 +40,8 @@ export function Reveal({
         }
       },
       {
-        threshold: 0.16,
-        rootMargin: "0px 0px -8% 0px"
+        threshold,
+        rootMargin
       }
     );
 
@@ -46,7 +50,7 @@ export function Reveal({
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [rootMargin, threshold]);
 
   return (
     <div ref={ref} className={`reveal${isVisible ? " is-visible" : ""}${className ? ` ${className}` : ""}`}>
