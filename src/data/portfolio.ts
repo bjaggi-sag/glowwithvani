@@ -13,11 +13,12 @@ export type PortfolioItem = {
 
 const supportedImageExtensions = [".jpg", ".jpeg", ".png", ".webp"] as const;
 const extensionPriority = [".webp", ".jpg", ".jpeg", ".png"] as const;
-const preferredCategoryOrder = ["bridal", "reception", "soft-glam", "editorial", "theatre", "creature", "prosthetics", "sfx"] as const;
+const preferredCategoryOrder = ["bridal", "reception", "soft-glam", "editorial", "theatre", "prosthetics", "sfx", "creature"] as const;
 const categoryDisplayNames: Record<string, string> = {
   sfx: "SFX"
 };
 const portfolioObjectPositions: Record<string, string> = {
+  "bridal/RAW-464": "center 18%",
   "editorial/editorial-1": "center 22%",
   "editorial/editorial-2": "center 18%",
   "editorial/editorial-3": "center center",
