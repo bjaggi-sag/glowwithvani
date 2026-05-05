@@ -19,6 +19,7 @@
 .DS_Store
 *.pem
 tmp/
+public/portfolio/optimized/
 
 # debug
 npm-debug.log*

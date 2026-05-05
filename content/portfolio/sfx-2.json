@@ -1,0 +1,15 @@
+{
+  "slug": "sfx-2",
+  "title": "SFX 2",
+  "sourceImage": "/portfolio/sfx/sfx2.jpg",
+  "alt": "SFX makeup look 2",
+  "primaryTag": "SFX",
+  "sortOrder": 130,
+  "displayTags": [
+    "SFX"
+  ],
+  "internalTags": [
+    "special-effects-makeup",
+    "creative-makeup"
+  ]
+}

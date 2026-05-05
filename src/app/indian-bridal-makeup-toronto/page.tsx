@@ -22,6 +22,12 @@ export const metadata: Metadata = {
 };
 
 export default function IndianBridalMakeupTorontoPage() {
+  const bridalShowcase = [
+    { src: "/portfolio/optimized/bridal-raw-464.webp", alt: "Indian bridal portrait with dupatta", label: "Ceremony" },
+    { src: "/portfolio/optimized/bridal-priyanshi-8.webp", alt: "Indian bridal reception makeup portrait", label: "Reception" },
+    { src: "/portfolio/optimized/bridal-priyanshi-11.webp", alt: "Indian bridal portrait detail", label: "Portraits" }
+  ];
+
   return (
     <>
       <ServiceLandingPage
@@ -79,15 +85,11 @@ export default function IndianBridalMakeupTorontoPage() {
           <Reveal className="container">
             <SectionHeading
               kicker="Bridal Gallery"
-              title="Placeholder bridal looks"
-              copy="These are temporary placeholders for ceremony, reception, and bridal portrait styling until final bridal work is added."
+              title="Featured bridal looks"
+              copy="A focused bridal selection showing the kind of softness, polish, and bridal richness this service is designed around."
             />
             <div className="bridal-placeholder-grid">
-              {[
-                { src: "/portfolio/bridal/bridal-1.jpg", alt: "Bridal ceremony placeholder", label: "Ceremony" },
-                { src: "/portfolio/bridal/bridal-2.jpg", alt: "Bridal reception placeholder", label: "Reception" },
-                { src: "/portfolio/bridal/bridal-3.jpg", alt: "Bridal portrait placeholder", label: "Portraits" }
-              ].map((item) => (
+              {bridalShowcase.map((item) => (
                 <article key={item.src} className="card bridal-placeholder-card">
                   <div className="bridal-placeholder-media">
                     <Image src={item.src} alt={item.alt} width={900} height={1200} className="bridal-placeholder-image" />

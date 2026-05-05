@@ -1,0 +1,17 @@
+{
+  "slug": "prosthetics-1",
+  "title": "Prosthetics",
+  "sourceImage": "/portfolio/prosthetics/Prosthetic.jpg",
+  "alt": "Prosthetic makeup transformation",
+  "primaryTag": "Prosthetics",
+  "sortOrder": 110,
+  "displayTags": [
+    "Prosthetics",
+    "SFX"
+  ],
+  "internalTags": [
+    "prosthetic-makeup",
+    "special-effects-makeup",
+    "creative-makeup"
+  ]
+}

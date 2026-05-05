@@ -18,7 +18,7 @@ export function PortfolioGrid({
   const [active, setActive] = useState<FilterKey>("All");
 
   const filtered = useMemo(() => {
-    const visibleItems = active === "All" ? items : items.filter((item) => item.tags.includes(active));
+    const visibleItems = active === "All" ? items : items.filter((item) => item.displayTags.includes(active));
     return preview ? visibleItems.slice(0, 4) : visibleItems;
   }, [active, items, preview]);
 

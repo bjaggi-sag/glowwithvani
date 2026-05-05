@@ -22,6 +22,12 @@ export const metadata: Metadata = {
 };
 
 export default function TorontoBridalMakeupArtistPage() {
+  const bridalShowcase = [
+    { src: "/portfolio/optimized/bridal-raw-464.webp", alt: "Toronto bridal portrait with dupatta", label: "Ceremony" },
+    { src: "/portfolio/optimized/bridal-priyanshi-8.webp", alt: "Toronto bridal makeup portrait", label: "Reception" },
+    { src: "/portfolio/optimized/bridal-priyanshi-11.webp", alt: "Toronto bridal makeup detail portrait", label: "Portraits" }
+  ];
+
   return (
     <>
       <ServiceLandingPage
@@ -57,8 +63,8 @@ export default function TorontoBridalMakeupArtistPage() {
         heroAside={
           <article className="card landing-page-hero-image-wrap">
             <Image
-              src="/portfolio/bridal/bridal-2.jpg"
-              alt="Bridal placeholder image for Toronto bridal makeup"
+              src="/portfolio/optimized/bridal-priyanshi-8.webp"
+              alt="Bridal portrait for Toronto bridal makeup"
               width={900}
               height={1200}
               className="landing-page-hero-image"
@@ -91,15 +97,11 @@ export default function TorontoBridalMakeupArtistPage() {
           <Reveal className="container">
             <SectionHeading
               kicker="Bridal Gallery"
-              title="Placeholder bridal looks"
-              copy="Temporary bridal placeholders are shown here until final Toronto bridal imagery is added."
+              title="Featured bridal looks"
+              copy="A few bridal looks that reflect the polished, warm, and camera-ready finish offered for Toronto weddings."
             />
             <div className="bridal-placeholder-grid">
-              {[
-                { src: "/portfolio/bridal/bridal-1.jpg", alt: "Toronto bridal ceremony placeholder", label: "Ceremony" },
-                { src: "/portfolio/bridal/bridal-2.jpg", alt: "Toronto bridal reception placeholder", label: "Reception" },
-                { src: "/portfolio/bridal/bridal-3.jpg", alt: "Toronto bridal portrait placeholder", label: "Portraits" }
-              ].map((item) => (
+              {bridalShowcase.map((item) => (
                 <article key={item.src} className="card bridal-placeholder-card">
                   <div className="bridal-placeholder-media">
                     <Image src={item.src} alt={item.alt} width={900} height={1200} className="bridal-placeholder-image" />

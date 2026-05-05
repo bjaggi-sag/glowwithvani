@@ -1,0 +1,91 @@
+backend:
+  name: github
+  repo: bjaggi-sag/glowwithvani
+  branch: main
+
+media_folder: public/portfolio/originals
+public_folder: /portfolio/originals
+
+publish_mode: simple
+locale: en_CA
+
+collections:
+  - name: portfolio
+    label: Portfolio
+    label_singular: Portfolio Item
+    folder: content/portfolio
+    create: true
+    format: json
+    extension: json
+    identifier_field: slug
+    slug: '{{fields.slug}}'
+    summary: '{{fields.title}} — {{fields.primaryTag}}'
+    fields:
+      - label: Slug
+        name: slug
+        widget: string
+        hint: Stable ID used for the optimized portfolio image filename.
+      - label: Title
+        name: title
+        widget: string
+      - label: Source Image
+        name: sourceImage
+        widget: image
+        choose_url: false
+        allow_multiple: false
+      - label: Alt Text
+        name: alt
+        widget: string
+      - label: Display Tags
+        name: displayTags
+        widget: list
+        summary: '{{fields.value}}'
+        hint: Visible website filters. Choose only tags that should appear in the portfolio UI.
+        field:
+          label: Display Tag
+          name: value
+          widget: select
+          options:
+            - Bridal
+            - Reception
+            - Soft Glam
+            - Editorial
+            - Theatre
+            - Prosthetics
+            - SFX
+            - Creature
+      - label: Internal Tags
+        name: internalTags
+        widget: list
+        required: false
+        collapsed: false
+        hint: Internal-only tags in kebab-case for admin and SEO organization. Example: indian-bridal
+        field:
+          label: Internal Tag
+          name: value
+          widget: string
+          pattern:
+            - '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+            - Use lowercase kebab-case only, for example indian-bridal.
+      - label: Primary Tag
+        name: primaryTag
+        widget: select
+        options:
+          - Bridal
+          - Reception
+          - Soft Glam
+          - Editorial
+          - Theatre
+          - Prosthetics
+          - SFX
+          - Creature
+      - label: Object Position
+        name: objectPosition
+        widget: string
+        required: false
+        hint: Optional CSS object-position value such as center 18%.
+      - label: Sort Order
+        name: sortOrder
+        widget: number
+        value_type: int
+        default: 100

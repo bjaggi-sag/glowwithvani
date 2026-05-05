@@ -1,0 +1,17 @@
+{
+  "slug": "editorial-3",
+  "title": "Editorial 3",
+  "sourceImage": "/portfolio/editorial/editorial-3.jpg",
+  "alt": "Editorial makeup look 3",
+  "primaryTag": "Editorial",
+  "objectPosition": "center center",
+  "sortOrder": 80,
+  "displayTags": [
+    "Editorial"
+  ],
+  "internalTags": [
+    "editorial-makeup",
+    "photoshoot-makeup",
+    "studio-makeup"
+  ]
+}

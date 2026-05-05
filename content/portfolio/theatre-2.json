@@ -1,0 +1,17 @@
+{
+  "slug": "theatre-2",
+  "title": "Theatre 2",
+  "sourceImage": "/portfolio/theatre/theatre-2.jpg",
+  "alt": "Theatre makeup look 2",
+  "primaryTag": "Theatre",
+  "objectPosition": "68% center",
+  "sortOrder": 100,
+  "displayTags": [
+    "Theatre"
+  ],
+  "internalTags": [
+    "theatre-makeup",
+    "stage-makeup",
+    "performance-makeup"
+  ]
+}
