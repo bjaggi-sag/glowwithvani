@@ -1,178 +1,176 @@
-import { readdirSync, statSync } from "fs";
-import path from "path";
-export type PortfolioCategory = string;
+export type PortfolioTag = string;
 
 export type PortfolioItem = {
   id: string;
   title: string;
-  category: PortfolioCategory;
   image: string;
   alt: string;
+  tags: PortfolioTag[];
+  primaryTag: PortfolioTag;
   objectPosition?: string;
+  sortOrder: number;
 };
 
-const supportedImageExtensions = [".jpg", ".jpeg", ".png", ".webp"] as const;
-const extensionPriority = [".webp", ".jpg", ".jpeg", ".png"] as const;
-const preferredCategoryOrder = ["bridal", "reception", "soft-glam", "editorial", "theatre", "prosthetics", "sfx", "creature"] as const;
-const categoryDisplayNames: Record<string, string> = {
-  sfx: "SFX"
-};
-const portfolioObjectPositions: Record<string, string> = {
-  "bridal/RAW-464": "center 18%",
-  "editorial/editorial-1": "center 22%",
-  "editorial/editorial-2": "center 18%",
-  "editorial/editorial-3": "center center",
-  "editorial/editorial4": "center center",
-  "theatre/theatre-2": "68% center"
-};
-const portfolioItemOrder: Record<string, number> = {
-  "editorial/editorial-1": 1,
-  "editorial/editorial-2": 2,
-  "editorial/editorial-3": 3,
-  "theatre/theare-1": 1,
-  "theatre/theatre-2": 2
-};
+const visiblePortfolioTags = ["Bridal", "Reception", "Soft Glam", "Editorial", "Theatre", "Prosthetics", "SFX", "Creature"] as const;
 
-function toTitleCase(value: string) {
-  return value
-    .split("-")
-    .filter(Boolean)
-    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
-    .join(" ");
-}
+export type PortfolioCategory = (typeof visiblePortfolioTags)[number];
 
-function compareNaturally(left: string, right: string) {
-  return left.localeCompare(right, undefined, { numeric: true, sensitivity: "base" });
-}
+const portfolioItems: PortfolioItem[] = [
+  {
+    id: "bridal-raw-464",
+    title: "Bridal Portrait",
+    image: "/portfolio/bridal/RAW-464.jpg",
+    alt: "Bridal portrait with dupatta, jewelry, and soft glam makeup",
+    tags: ["Bridal", "Soft Glam", "Indian Bridal"],
+    primaryTag: "Bridal",
+    objectPosition: "center 18%",
+    sortOrder: 10
+  },
+  {
+    id: "bridal-priyanshi-8",
+    title: "Priyanshi Bridal",
+    image: "/portfolio/bridal/priyanshi 8.jpeg",
+    alt: "Bridal makeup portrait for Priyanshi",
+    tags: ["Bridal", "Indian Bridal", "Soft Glam"],
+    primaryTag: "Bridal",
+    sortOrder: 20
+  },
+  {
+    id: "bridal-priyanshi-11",
+    title: "Priyanshi Bridal Detail",
+    image: "/portfolio/bridal/priyanshi 11.jpeg",
+    alt: "Bridal makeup detail portrait for Priyanshi",
+    tags: ["Bridal", "Indian Bridal", "Soft Glam"],
+    primaryTag: "Bridal",
+    sortOrder: 30
+  },
+  {
+    id: "reception-kajal-4",
+    title: "Kajal Reception",
+    image: "/portfolio/reception/kajal 4.jpeg",
+    alt: "Reception glam makeup portrait for Kajal",
+    tags: ["Reception", "Soft Glam", "Indian Bridal"],
+    primaryTag: "Reception",
+    sortOrder: 40
+  },
+  {
+    id: "reception-kajal-5",
+    title: "Kajal Reception Detail",
+    image: "/portfolio/reception/kajal 5.jpeg",
+    alt: "Reception glam makeup detail portrait for Kajal",
+    tags: ["Reception", "Soft Glam", "Indian Bridal"],
+    primaryTag: "Reception",
+    sortOrder: 50
+  },
+  {
+    id: "editorial-1",
+    title: "Editorial 1",
+    image: "/portfolio/editorial/editorial-1.jpg",
+    alt: "Editorial makeup look 1",
+    tags: ["Editorial"],
+    primaryTag: "Editorial",
+    objectPosition: "center 22%",
+    sortOrder: 60
+  },
+  {
+    id: "editorial-2",
+    title: "Editorial 2",
+    image: "/portfolio/editorial/editorial-2.jpg",
+    alt: "Editorial makeup look 2",
+    tags: ["Editorial"],
+    primaryTag: "Editorial",
+    objectPosition: "center 18%",
+    sortOrder: 70
+  },
+  {
+    id: "editorial-3",
+    title: "Editorial 3",
+    image: "/portfolio/editorial/editorial-3.jpg",
+    alt: "Editorial makeup look 3",
+    tags: ["Editorial"],
+    primaryTag: "Editorial",
+    objectPosition: "center center",
+    sortOrder: 80
+  },
+  {
+    id: "theatre-1",
+    title: "Theatre 1",
+    image: "/portfolio/theatre/theare-1.jpg",
+    alt: "Theatre makeup look 1",
+    tags: ["Theatre"],
+    primaryTag: "Theatre",
+    sortOrder: 90
+  },
+  {
+    id: "theatre-2",
+    title: "Theatre 2",
+    image: "/portfolio/theatre/theatre-2.jpg",
+    alt: "Theatre makeup look 2",
+    tags: ["Theatre"],
+    primaryTag: "Theatre",
+    objectPosition: "68% center",
+    sortOrder: 100
+  },
+  {
+    id: "prosthetics-1",
+    title: "Prosthetics",
+    image: "/portfolio/prosthetics/Prosthetic.jpg",
+    alt: "Prosthetic makeup transformation",
+    tags: ["Prosthetics", "SFX"],
+    primaryTag: "Prosthetics",
+    sortOrder: 110
+  },
+  {
+    id: "sfx-1",
+    title: "SFX 1",
+    image: "/portfolio/sfx/Sfx1.jpg",
+    alt: "SFX makeup look 1",
+    tags: ["SFX"],
+    primaryTag: "SFX",
+    sortOrder: 120
+  },
+  {
+    id: "sfx-2",
+    title: "SFX 2",
+    image: "/portfolio/sfx/sfx2.jpg",
+    alt: "SFX makeup look 2",
+    tags: ["SFX"],
+    primaryTag: "SFX",
+    sortOrder: 130
+  },
+  {
+    id: "creature-1",
+    title: "Creature Design",
+    image: "/portfolio/creature/CREATURE_DESIGN_TWINKLE_KAUR-1168.jpg",
+    alt: "Creature design makeup look",
+    tags: ["Creature", "Prosthetics", "SFX"],
+    primaryTag: "Creature",
+    sortOrder: 140
+  }
+];
 
-function getCategoryLabel(folder: string) {
-  return categoryDisplayNames[folder] ?? toTitleCase(folder);
-}
-
-function compareCategoryFolders(left: string, right: string) {
-  const leftOrder = preferredCategoryOrder.indexOf(left as (typeof preferredCategoryOrder)[number]);
-  const rightOrder = preferredCategoryOrder.indexOf(right as (typeof preferredCategoryOrder)[number]);
-
-  if (leftOrder !== -1 || rightOrder !== -1) {
-    if (leftOrder === -1) {
-      return 1;
-    }
-
-    if (rightOrder === -1) {
-      return -1;
-    }
-
-    if (leftOrder !== rightOrder) {
-      return leftOrder - rightOrder;
-    }
+function compareItems(left: PortfolioItem, right: PortfolioItem) {
+  if (left.sortOrder !== right.sortOrder) {
+    return left.sortOrder - right.sortOrder;
   }
 
-  return compareNaturally(left, right);
-}
-
-function getExtensionPriority(fileName: string) {
-  const extension = path.extname(fileName).toLowerCase() as (typeof extensionPriority)[number];
-  const index = extensionPriority.indexOf(extension);
-  return index === -1 ? extensionPriority.length : index;
-}
-
-function normalizeBaseName(baseName: string, folder: string) {
-  const normalizedBaseName = baseName.toLowerCase();
-  const prefixes = [folder.toLowerCase()];
-
-  if (folder.toLowerCase() === "theatre") {
-    prefixes.push("theare");
-  }
-
-  for (const prefix of prefixes) {
-    if (normalizedBaseName.startsWith(prefix)) {
-      const slicedValue = baseName.slice(prefix.length).replace(/^[-_\s]+/, "").trim();
-      return slicedValue || baseName;
-    }
-  }
-
-  return baseName;
-}
-
-function getPortfolioFolders() {
-  const rootDirectory = path.join(process.cwd(), "public", "portfolio");
-
-  try {
-    return readdirSync(rootDirectory)
-      .filter((folderName) => {
-        const folderPath = path.join(rootDirectory, folderName);
-        return statSync(folderPath).isDirectory();
-      })
-      .sort(compareCategoryFolders);
-  } catch {
-    return [];
-  }
-}
-
-function readCategoryItems(category: PortfolioCategory, folder: string): PortfolioItem[] {
-  const directory = path.join(process.cwd(), "public", "portfolio", folder);
-
-  let fileNames: string[] = [];
-
-  try {
-    const dedupedFileNames = new Map<string, string>();
-
-    const discoveredFileNames = readdirSync(directory)
-      .filter((fileName) => supportedImageExtensions.some((extension) => fileName.toLowerCase().endsWith(extension)))
-      .sort((left, right) => {
-        const leftBaseName = left.replace(/\.(jpg|jpeg|png|webp)$/i, "");
-        const rightBaseName = right.replace(/\.(jpg|jpeg|png|webp)$/i, "");
-
-        if (leftBaseName !== rightBaseName) {
-          return compareNaturally(leftBaseName, rightBaseName);
-        }
-
-        return getExtensionPriority(left) - getExtensionPriority(right);
-      });
-
-    for (const fileName of discoveredFileNames) {
-      const baseName = fileName.replace(/\.(jpg|jpeg|png|webp)$/i, "").toLowerCase();
-      if (!dedupedFileNames.has(baseName)) {
-        dedupedFileNames.set(baseName, fileName);
-      }
-    }
-
-    fileNames = Array.from(dedupedFileNames.values()).sort((left, right) => {
-      const leftBaseName = left.replace(/\.(jpg|jpeg|png|webp)$/i, "");
-      const rightBaseName = right.replace(/\.(jpg|jpeg|png|webp)$/i, "");
-      const leftOrder = portfolioItemOrder[`${folder}/${leftBaseName}`] ?? Number.MAX_SAFE_INTEGER;
-      const rightOrder = portfolioItemOrder[`${folder}/${rightBaseName}`] ?? Number.MAX_SAFE_INTEGER;
-
-      if (leftOrder !== rightOrder) {
-        return leftOrder - rightOrder;
-      }
-
-      return compareNaturally(leftBaseName, rightBaseName);
-    });
-  } catch {
-    return [];
-  }
-
-  return fileNames.map((fileName, index) => {
-    const baseName = fileName.replace(/\.(jpg|jpeg|png|webp)$/i, "");
-    const objectPosition = portfolioObjectPositions[`${folder}/${baseName}`];
-    const normalizedTitle = normalizeBaseName(baseName, folder);
-
-    return {
-      id: `${folder}-${baseName.toLowerCase()}`,
-      title: toTitleCase(normalizedTitle),
-      category,
-      image: `/portfolio/${folder}/${fileName}`,
-      alt: `${category} makeup look ${index + 1}`,
-      objectPosition
-    };
-  });
+  return left.title.localeCompare(right.title, undefined, { numeric: true, sensitivity: "base" });
 }
 
 export function getPortfolioItems(): PortfolioItem[] {
-  return getPortfolioFolders().flatMap((folder) => readCategoryItems(getCategoryLabel(folder), folder));
+  return [...portfolioItems].sort(compareItems);
 }
 
 export function getPortfolioCategories(): ("All" | PortfolioCategory)[] {
-  return ["All", ...getPortfolioFolders().map((folder) => getCategoryLabel(folder))];
+  const availableTags = new Set<PortfolioCategory>();
+
+  for (const item of portfolioItems) {
+    for (const tag of item.tags) {
+      if (visiblePortfolioTags.includes(tag as PortfolioCategory)) {
+        availableTags.add(tag as PortfolioCategory);
+      }
+    }
+  }
+
+  return ["All", ...visiblePortfolioTags.filter((tag) => availableTags.has(tag))];
 }
