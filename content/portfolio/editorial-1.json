@@ -13,5 +13,7 @@
     "editorial-makeup",
     "photoshoot-makeup",
     "studio-makeup"
-  ]
+  ],
+  "homepageFeature": true,
+  "homepageOrder": 4
 }

@@ -15,5 +15,7 @@
     "reception-makeup",
     "soft-glam",
     "reception-portrait"
-  ]
+  ],
+  "homepageFeature": true,
+  "homepageOrder": 3
 }

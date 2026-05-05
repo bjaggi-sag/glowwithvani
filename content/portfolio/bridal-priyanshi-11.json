@@ -15,5 +15,7 @@
     "bridal-makeup",
     "soft-glam",
     "bridal-detail"
-  ]
+  ],
+  "homepageFeature": true,
+  "homepageOrder": 2
 }

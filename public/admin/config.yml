@@ -89,3 +89,15 @@ collections:
         widget: number
         value_type: int
         default: 100
+      - label: Homepage Feature
+        name: homepageFeature
+        widget: boolean
+        required: false
+        default: false
+        hint: Enable to include this image in the curated homepage portfolio preview.
+      - label: Homepage Order
+        name: homepageOrder
+        widget: number
+        value_type: int
+        required: false
+        hint: Lower numbers appear first in the homepage preview when Homepage Feature is enabled.

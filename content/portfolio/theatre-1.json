@@ -12,5 +12,7 @@
     "theatre-makeup",
     "stage-makeup",
     "performance-makeup"
-  ]
+  ],
+  "homepageFeature": true,
+  "homepageOrder": 5
 }

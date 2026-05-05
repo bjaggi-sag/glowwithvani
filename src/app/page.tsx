@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { PortfolioGrid } from "@/components/PortfolioGrid";
 import { ServicesPricingSection } from "@/components/ServicesPricingSection";
 import { InstagramIcon } from "@/components/InstagramIcon";
-import { getPortfolioCategories, getPortfolioItems } from "@/data/portfolio";
+import { getHomepagePortfolioItems, getPortfolioCategoriesForItems } from "@/data/portfolio";
 import { services } from "@/data/services";
 import { Reveal } from "@/components/Reveal";
 
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const portfolioItems = getPortfolioItems();
-  const portfolioCategories = getPortfolioCategories();
+  const portfolioItems = getHomepagePortfolioItems();
+  const portfolioCategories = getPortfolioCategoriesForItems(portfolioItems);
 
   return (
     <main>

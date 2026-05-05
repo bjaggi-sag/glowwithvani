@@ -16,6 +16,8 @@ type PortfolioEntryRecord = {
   primaryTag: PortfolioCategory;
   objectPosition?: string;
   sortOrder: number;
+  homepageFeature?: boolean;
+  homepageOrder?: number;
 };
 
 export type PortfolioItem = {
@@ -29,6 +31,8 @@ export type PortfolioItem = {
   objectPosition?: string;
   sortOrder: number;
   sourceImage: string;
+  homepageFeature: boolean;
+  homepageOrder?: number;
 };
 
 function getPortfolioContentDirectory() {
@@ -45,6 +49,17 @@ function compareItems(left: PortfolioItem, right: PortfolioItem) {
   }
 
   return left.title.localeCompare(right.title, undefined, { numeric: true, sensitivity: "base" });
+}
+
+function compareHomepageItems(left: PortfolioItem, right: PortfolioItem) {
+  const leftOrder = left.homepageOrder ?? Number.MAX_SAFE_INTEGER;
+  const rightOrder = right.homepageOrder ?? Number.MAX_SAFE_INTEGER;
+
+  if (leftOrder !== rightOrder) {
+    return leftOrder - rightOrder;
+  }
+
+  return compareItems(left, right);
 }
 
 function readPortfolioEntries(): PortfolioItem[] {
@@ -67,7 +82,9 @@ function readPortfolioEntries(): PortfolioItem[] {
           primaryTag: record.primaryTag,
           objectPosition: record.objectPosition,
           sortOrder: record.sortOrder,
-          sourceImage: record.sourceImage
+          sourceImage: record.sourceImage,
+          homepageFeature: record.homepageFeature ?? false,
+          homepageOrder: record.homepageOrder
         } satisfies PortfolioItem;
       })
       .sort(compareItems);
@@ -80,10 +97,40 @@ export function getPortfolioItems(): PortfolioItem[] {
   return readPortfolioEntries();
 }
 
+export function getHomepagePortfolioItems(): PortfolioItem[] {
+  const items = readPortfolioEntries();
+  const featuredItems = items.filter((item) => item.homepageFeature).sort(compareHomepageItems);
+
+  if (featuredItems.length > 0) {
+    return featuredItems;
+  }
+
+  const previewCategoryOrder: PortfolioCategory[] = ["Bridal", "Reception", "Editorial", "Theatre", "Prosthetics", "SFX", "Creature"];
+  const pickedIds = new Set<string>();
+
+  return previewCategoryOrder
+    .map((category) => {
+      const primaryMatch = items.find((item) => !pickedIds.has(item.id) && item.primaryTag === category);
+      const fallbackMatch = items.find((item) => !pickedIds.has(item.id) && item.displayTags.includes(category));
+      const selected = primaryMatch ?? fallbackMatch;
+
+      if (selected) {
+        pickedIds.add(selected.id);
+      }
+
+      return selected ?? null;
+    })
+    .filter((item): item is PortfolioItem => item !== null);
+}
+
 export function getPortfolioCategories(): ("All" | PortfolioCategory)[] {
+  return getPortfolioCategoriesForItems(readPortfolioEntries());
+}
+
+export function getPortfolioCategoriesForItems(items: PortfolioItem[]): ("All" | PortfolioCategory)[] {
   const availableTags = new Set<PortfolioCategory>();
 
-  for (const item of readPortfolioEntries()) {
+  for (const item of items) {
     for (const tag of item.displayTags) {
       if (visiblePortfolioTags.includes(tag)) {
         availableTags.add(tag);
