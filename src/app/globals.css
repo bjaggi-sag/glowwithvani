@@ -673,6 +673,16 @@ html[data-theme="dark"] .hero-logo {
   overflow: hidden;
 }
 
+.portfolio-media-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: inherit;
+  cursor: zoom-in;
+}
+
 .portfolio-media {
   aspect-ratio: 3 / 4;
   overflow: hidden;
@@ -684,6 +694,79 @@ html[data-theme="dark"] .hero-logo {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  transition: transform 0.22s ease;
+}
+
+.portfolio-media-button:hover .portfolio-image {
+  transform: scale(1.02);
+}
+
+.portfolio-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(17, 12, 8, 0.82);
+  backdrop-filter: blur(8px);
+}
+
+.portfolio-lightbox-shell {
+  position: relative;
+  width: min(100%, 980px);
+}
+
+.portfolio-lightbox-media {
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--line) 76%, transparent);
+  background: color-mix(in srgb, var(--surface) 88%, black 12%);
+}
+
+.portfolio-lightbox-image {
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.portfolio-lightbox-caption {
+  margin: 0;
+  padding: 0.9rem 1rem 1rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.portfolio-lightbox-close,
+.portfolio-lightbox-nav {
+  position: absolute;
+  z-index: 1;
+  border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  background: color-mix(in srgb, var(--surface) 88%, black 12%);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.portfolio-lightbox-close {
+  top: 0.75rem;
+  right: 0.75rem;
+}
+
+.portfolio-lightbox-nav {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.portfolio-lightbox-nav.prev {
+  left: 0.75rem;
+}
+
+.portfolio-lightbox-nav.next {
+  right: 0.75rem;
 }
 
 .portfolio-meta {
@@ -892,6 +975,31 @@ html[data-theme="dark"] .hero-logo {
 
 .status.err {
   color: var(--error);
+}
+
+.contact-feedback-card {
+  margin-top: 0.25rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+}
+
+.contact-feedback-copy {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.contact-feedback-actions {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.contact-error-panel {
+  background: color-mix(in srgb, var(--surface-soft) 84%, #f3d7d2 16%);
 }
 
 @media (min-width: 768px) {
