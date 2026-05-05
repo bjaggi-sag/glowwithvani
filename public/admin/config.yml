@@ -59,7 +59,7 @@ collections:
         widget: list
         required: false
         collapsed: false
-        hint: Internal-only tags in kebab-case for admin and SEO organization. Example: indian-bridal
+        hint: "Internal-only tags in kebab-case for admin and SEO organization. Example: indian-bridal"
         field:
           label: Internal Tag
           name: value
