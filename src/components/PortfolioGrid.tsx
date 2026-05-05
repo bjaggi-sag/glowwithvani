@@ -18,9 +18,31 @@ export function PortfolioGrid({
   const [active, setActive] = useState<FilterKey>("All");
 
   const filtered = useMemo(() => {
-    const visibleItems = active === "All" ? items : items.filter((item) => item.displayTags.includes(active));
-    return preview ? visibleItems.slice(0, 4) : visibleItems;
-  }, [active, items, preview]);
+    if (active === "All") {
+      if (!preview) {
+        return items;
+      }
+
+      const previewCategories = categories.filter((category): category is PortfolioCategory => category !== "All");
+      const pickedIds = new Set<string>();
+
+      return previewCategories
+        .map((category) => {
+          const primaryMatch = items.find((item) => !pickedIds.has(item.id) && item.primaryTag === category);
+          const fallbackMatch = items.find((item) => !pickedIds.has(item.id) && item.displayTags.includes(category));
+          const selected = primaryMatch ?? fallbackMatch;
+
+          if (selected) {
+            pickedIds.add(selected.id);
+          }
+
+          return selected ?? null;
+        })
+        .filter((item): item is PortfolioItem => item !== null);
+    }
+
+    return items.filter((item) => item.displayTags.includes(active));
+  }, [active, categories, items, preview]);
 
   return (
     <div>
