@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { PortfolioGrid } from "@/components/PortfolioGrid";
 import { ServicesPricingSection } from "@/components/ServicesPricingSection";
 import { InstagramIcon } from "@/components/InstagramIcon";
-import { getHomepagePortfolioItems, getPortfolioCategoriesForItems } from "@/data/portfolio";
+import { getHomepagePortfolioItems, getPortfolioCategoriesForItems, getPortfolioItems } from "@/data/portfolio";
 import { services } from "@/data/services";
 import { Reveal } from "@/components/Reveal";
 
@@ -35,7 +35,8 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const portfolioItems = getHomepagePortfolioItems();
+  const featuredPortfolioItems = getHomepagePortfolioItems();
+  const portfolioItems = getPortfolioItems();
   const portfolioCategories = getPortfolioCategoriesForItems(portfolioItems);
 
   return (
@@ -75,7 +76,7 @@ export default function HomePage() {
             title="Portfolio Preview"
             copy="A quick look across bridal, editorial, soft glam, and SFX styles."
           />
-          <PortfolioGrid items={portfolioItems} categories={portfolioCategories} preview />
+          <PortfolioGrid items={portfolioItems} categories={portfolioCategories} preview featuredItems={featuredPortfolioItems} allHref="/portfolio" />
           <div className="section-cta">
             <Link href="/portfolio" className="button secondary">
               Explore Full Portfolio

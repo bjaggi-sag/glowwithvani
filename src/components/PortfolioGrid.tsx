@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import Link from "next/link";
 import Image from "next/image";
 import type { PortfolioCategory, PortfolioItem } from "@/data/portfolio";
 
@@ -9,21 +11,35 @@ type FilterKey = "All" | PortfolioCategory;
 export function PortfolioGrid({
   items,
   categories,
-  preview = false
+  preview = false,
+  featuredItems,
+  allHref
 }: {
   items: PortfolioItem[];
   categories: FilterKey[];
   preview?: boolean;
+  featuredItems?: PortfolioItem[];
+  allHref?: string;
 }) {
   const [active, setActive] = useState<FilterKey>("All");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const lightboxRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const filtered = useMemo(() => {
-    const visibleItems = active === "All" ? items : items.filter((item) => item.displayTags.includes(active));
-    return preview ? visibleItems : visibleItems;
-  }, [active, items, preview]);
+    if (active === "All") {
+      return featuredItems ?? items;
+    }
+
+    return items.filter((item) => item.displayTags.includes(active));
+  }, [active, featuredItems, items]);
 
   const lightboxItem = lightboxIndex === null ? null : filtered[lightboxIndex] ?? null;
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (lightboxItem === null) {
@@ -61,6 +77,14 @@ export function PortfolioGrid({
 
     window.addEventListener("keydown", handleKeyDown);
 
+    requestAnimationFrame(() => {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+      lightboxRef.current?.scrollTo({ top: 0, behavior: "auto" });
+      closeButtonRef.current?.focus({ preventScroll: true });
+    });
+
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
@@ -97,9 +121,17 @@ export function PortfolioGrid({
 
   return (
     <div>
-      <div className="filters" role="tablist" aria-label="Portfolio categories">
+      <div className="filters" aria-label="Portfolio categories">
         {categories.map((category) => {
           const isActive = active === category;
+          if (category === "All" && allHref) {
+            return (
+              <Link key={category} href={allHref} className={`pill ${isActive ? "active" : ""}`}>
+                {category}
+              </Link>
+            );
+          }
+
           return (
             <button
               key={category}
@@ -134,34 +166,50 @@ export function PortfolioGrid({
         ))}
       </div>
 
-      {lightboxItem ? (
-        <div className="portfolio-lightbox" role="dialog" aria-modal="true" aria-label="Portfolio image viewer" onClick={closeLightbox}>
-          <div className="portfolio-lightbox-shell" onClick={(event) => event.stopPropagation()}>
-            <button type="button" className="portfolio-lightbox-close" onClick={closeLightbox} aria-label="Close image viewer">
-              Close
-            </button>
-            <button type="button" className="portfolio-lightbox-nav prev" onClick={showPrevious} aria-label="Previous image">
-              Previous
-            </button>
-            <div className="portfolio-lightbox-media">
-              <Image
-                src={lightboxItem.image}
-                alt={lightboxItem.alt}
-                width={1400}
-                height={1700}
-                quality={96}
-                sizes="100vw"
-                className="portfolio-lightbox-image"
-                style={{ objectPosition: lightboxItem.objectPosition ?? "center" }}
-              />
-              <p className="portfolio-lightbox-caption">{lightboxItem.alt}</p>
-            </div>
-            <button type="button" className="portfolio-lightbox-nav next" onClick={showNext} aria-label="Next image">
-              Next
-            </button>
-          </div>
-        </div>
-      ) : null}
+      {isMounted && lightboxItem
+        ? createPortal(
+            <div
+              ref={lightboxRef}
+              className="portfolio-lightbox"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Portfolio image viewer"
+              onClick={closeLightbox}
+            >
+              <div className="portfolio-lightbox-shell" onClick={(event) => event.stopPropagation()}>
+                <button
+                  ref={closeButtonRef}
+                  type="button"
+                  className="portfolio-lightbox-close"
+                  onClick={closeLightbox}
+                  aria-label="Close image viewer"
+                >
+                  Close
+                </button>
+                <button type="button" className="portfolio-lightbox-nav prev" onClick={showPrevious} aria-label="Previous image">
+                  Previous
+                </button>
+                <div className="portfolio-lightbox-media">
+                  <Image
+                    src={lightboxItem.image}
+                    alt={lightboxItem.alt}
+                    width={1400}
+                    height={1700}
+                    quality={96}
+                    sizes="100vw"
+                    className="portfolio-lightbox-image"
+                    style={{ objectPosition: lightboxItem.objectPosition ?? "center" }}
+                  />
+                  <p className="portfolio-lightbox-caption">{lightboxItem.alt}</p>
+                </div>
+                <button type="button" className="portfolio-lightbox-nav next" onClick={showNext} aria-label="Next image">
+                  Next
+                </button>
+              </div>
+            </div>,
+            document.body
+          )
+        : null}
     </div>
   );
 }
