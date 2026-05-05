@@ -5,7 +5,7 @@
   "scripts": {
     "optimize:portfolio": "node scripts/optimize-portfolio-images.mjs",
     "prepare:assets": "npm run generate:pricing && npm run optimize:portfolio",
-    "generate:pricing": "python3 scripts/generate-pricing-sheet.py",
+    "generate:pricing": "node scripts/generate-pricing-sheet.mjs",
     "predev": "npm run prepare:assets",
     "prebuild": "npm run prepare:assets",
     "dev": "next dev",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "next": "15.2.0",
+    "pdfkit": "^0.18.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "sharp": "^0.34.5"
