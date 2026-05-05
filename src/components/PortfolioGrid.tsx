@@ -55,9 +55,6 @@ export function PortfolioGrid({
                 style={{ objectPosition: item.objectPosition ?? "center" }}
               />
             </div>
-            <div className="portfolio-meta">
-              <p>{item.primaryTag}</p>
-            </div>
           </article>
         ))}
       </div>
