@@ -23,9 +23,9 @@ export const metadata: Metadata = {
 
 export default function TorontoBridalMakeupArtistPage() {
   const bridalShowcase = [
-    { src: "/portfolio/optimized/bridal-raw-464.webp", alt: "Toronto bridal portrait with dupatta", label: "Ceremony" },
-    { src: "/portfolio/optimized/bridal-priyanshi-8.webp", alt: "Toronto bridal makeup portrait", label: "Reception" },
-    { src: "/portfolio/optimized/bridal-priyanshi-11.webp", alt: "Toronto bridal makeup detail portrait", label: "Portraits" }
+    { src: "/portfolio/optimized/bridal-raw-464.webp", alt: "Toronto bridal portrait with dupatta" },
+    { src: "/portfolio/optimized/bridal-priyanshi-8.webp", alt: "Toronto bridal makeup portrait" },
+    { src: "/portfolio/optimized/bridal-priyanshi-11.webp", alt: "Toronto bridal makeup detail portrait" }
   ];
 
   return (
@@ -63,7 +63,7 @@ export default function TorontoBridalMakeupArtistPage() {
         heroAside={
           <article className="card landing-page-hero-image-wrap">
             <Image
-              src="/portfolio/optimized/bridal-priyanshi-8.webp"
+              src="/portfolio/optimized/bridal-2.webp"
               alt="Bridal portrait for Toronto bridal makeup"
               width={900}
               height={1200}
@@ -105,9 +105,6 @@ export default function TorontoBridalMakeupArtistPage() {
                 <article key={item.src} className="card bridal-placeholder-card">
                   <div className="bridal-placeholder-media">
                     <Image src={item.src} alt={item.alt} width={900} height={1200} className="bridal-placeholder-image" />
-                  </div>
-                  <div className="bridal-placeholder-meta">
-                    <p>{item.label}</p>
                   </div>
                 </article>
               ))}

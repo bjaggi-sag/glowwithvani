@@ -23,9 +23,9 @@ export const metadata: Metadata = {
 
 export default function IndianBridalMakeupTorontoPage() {
   const bridalShowcase = [
-    { src: "/portfolio/optimized/bridal-raw-464.webp", alt: "Indian bridal portrait with dupatta", label: "Ceremony" },
-    { src: "/portfolio/optimized/bridal-priyanshi-8.webp", alt: "Indian bridal reception makeup portrait", label: "Reception" },
-    { src: "/portfolio/optimized/bridal-priyanshi-11.webp", alt: "Indian bridal portrait detail", label: "Portraits" }
+    { src: "/portfolio/optimized/bridal-raw-464.webp", alt: "Indian bridal portrait with dupatta" },
+    { src: "/portfolio/optimized/bridal-priyanshi-8.webp", alt: "Indian bridal reception makeup portrait" },
+    { src: "/portfolio/optimized/bridal-priyanshi-11.webp", alt: "Indian bridal portrait detail" }
   ];
 
   return (
@@ -60,6 +60,18 @@ export default function IndianBridalMakeupTorontoPage() {
         ctaHref="/contact"
         secondaryCtaLabel="View Portfolio"
         secondaryCtaHref="/portfolio"
+        heroAside={
+          <article className="card landing-page-hero-image-wrap">
+            <Image
+              src="/portfolio/optimized/bridal-raw-464.webp"
+              alt="Indian bridal portrait for Toronto bridal makeup"
+              width={900}
+              height={1200}
+              className="landing-page-hero-image"
+              priority
+            />
+          </article>
+        }
       >
         <section className="section">
           <Reveal className="container">
@@ -93,9 +105,6 @@ export default function IndianBridalMakeupTorontoPage() {
                 <article key={item.src} className="card bridal-placeholder-card">
                   <div className="bridal-placeholder-media">
                     <Image src={item.src} alt={item.alt} width={900} height={1200} className="bridal-placeholder-image" />
-                  </div>
-                  <div className="bridal-placeholder-meta">
-                    <p>{item.label}</p>
                   </div>
                 </article>
               ))}
