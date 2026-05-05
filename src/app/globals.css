@@ -706,8 +706,10 @@ html[data-theme="dark"] .hero-logo {
   inset: 0;
   z-index: 60;
   display: grid;
-  place-items: center;
-  padding: 1rem;
+  justify-items: center;
+  align-items: start;
+  overflow-y: auto;
+  padding: 1rem 1rem 2rem;
   background: rgba(17, 12, 8, 0.82);
   backdrop-filter: blur(8px);
 }
@@ -715,6 +717,7 @@ html[data-theme="dark"] .hero-logo {
 .portfolio-lightbox-shell {
   position: relative;
   width: min(100%, 980px);
+  margin: 0;
 }
 
 .portfolio-lightbox-media {
@@ -727,8 +730,9 @@ html[data-theme="dark"] .hero-logo {
 .portfolio-lightbox-image {
   width: 100%;
   height: auto;
-  max-height: 80vh;
+  max-height: min(78vh, calc(100vh - 9rem));
   object-fit: contain;
+  display: block;
 }
 
 .portfolio-lightbox-caption {
@@ -767,6 +771,51 @@ html[data-theme="dark"] .hero-logo {
 
 .portfolio-lightbox-nav.next {
   right: 0.75rem;
+}
+
+@media (max-width: 767px) {
+  .portfolio-lightbox {
+    padding-top: 0.75rem;
+  }
+
+  .portfolio-lightbox-shell {
+    width: 100%;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .portfolio-lightbox-media {
+    border-radius: 1rem;
+  }
+
+  .portfolio-lightbox-image {
+    max-height: min(70vh, calc(100vh - 11rem));
+  }
+
+  .portfolio-lightbox-close,
+  .portfolio-lightbox-nav {
+    position: static;
+    transform: none;
+  }
+
+  .portfolio-lightbox-close {
+    justify-self: end;
+  }
+
+  .portfolio-lightbox-nav {
+    display: inline-flex;
+  }
+
+  .portfolio-lightbox-nav.prev {
+    left: auto;
+    margin-right: 0.5rem;
+    justify-self: start;
+  }
+
+  .portfolio-lightbox-nav.next {
+    right: auto;
+    justify-self: end;
+  }
 }
 
 .portfolio-meta {
