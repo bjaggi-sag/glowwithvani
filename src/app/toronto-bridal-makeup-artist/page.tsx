@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceLandingPage } from "@/components/ServiceLandingPage";
+import { getPortfolioItems } from "@/data/portfolio";
 
 export const metadata: Metadata = {
   title: "Toronto Bridal Makeup Artist",
@@ -22,11 +23,9 @@ export const metadata: Metadata = {
 };
 
 export default function TorontoBridalMakeupArtistPage() {
-  const bridalShowcase = [
-    { src: "/portfolio/optimized/bridal-raw-464.webp", alt: "Toronto bridal portrait with dupatta" },
-    { src: "/portfolio/optimized/bridal-priyanshi-8.webp", alt: "Toronto bridal makeup portrait" },
-    { src: "/portfolio/optimized/bridal-priyanshi-11.webp", alt: "Toronto bridal makeup detail portrait" }
-  ];
+  const bridalShowcase = getPortfolioItems().filter(
+    (item) => item.displayTags.includes("Bridal") || item.displayTags.includes("Reception")
+  );
 
   return (
     <>
@@ -98,13 +97,13 @@ export default function TorontoBridalMakeupArtistPage() {
             <SectionHeading
               kicker="Bridal Gallery"
               title="Featured bridal looks"
-              copy="A few bridal looks that reflect the polished, warm, and camera-ready finish offered for Toronto weddings."
+              copy="Bridal and reception looks that reflect the polished, warm, and camera-ready finish offered for Toronto weddings."
             />
             <div className="bridal-placeholder-grid">
               {bridalShowcase.map((item) => (
-                <article key={item.src} className="card bridal-placeholder-card">
+                <article key={item.id} className="card bridal-placeholder-card">
                   <div className="bridal-placeholder-media">
-                    <Image src={item.src} alt={item.alt} width={900} height={1200} className="bridal-placeholder-image" />
+                    <Image src={item.image} alt={item.alt} width={900} height={1200} className="bridal-placeholder-image" />
                   </div>
                 </article>
               ))}
