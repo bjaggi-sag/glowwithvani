@@ -19,22 +19,22 @@ const serif = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL("https://glowwithvani.com"),
   title: {
-    default: "GlowWithVani | Toronto Makeup Artist",
+    default: "GlowWithVani | Toronto Makeup Artist for Bridal, Editorial & Luxury Glam",
     template: "%s | GlowWithVani"
   },
   description:
-    "GlowWithVani is a Toronto-based luxury makeup artist serving the GTA for bridal makeup, event glam, editorial photoshoots, and destination weddings.",
+    "GlowWithVani is a Toronto-based luxury makeup artist for bridal beauty, editorial shoots, event glam, theatre, and creative makeup across the GTA and destination weddings.",
   keywords: [
-    "bridal makeup artist Toronto",
     "Toronto makeup artist",
     "makeup artist Toronto",
+    "bridal makeup artist Toronto",
     "luxury makeup artist Toronto",
-    "GTA bridal makeup",
-    "GlowWithVani",
-    "destination wedding makeup artist",
-    "party makeup artist Toronto",
     "editorial makeup Toronto",
-    "SFX makeup artist"
+    "event makeup artist Toronto",
+    "theatre makeup artist Toronto",
+    "SFX makeup artist Toronto",
+    "destination wedding makeup artist",
+    "GlowWithVani"
   ],
   applicationName: "GlowWithVani",
   category: "beauty",
@@ -51,9 +51,9 @@ export const metadata: Metadata = {
     telephone: false
   },
   openGraph: {
-    title: "GlowWithVani | Toronto Bridal & Luxury Makeup Artist",
+    title: "GlowWithVani | Toronto Makeup Artist for Bridal, Editorial & Luxury Glam",
     description:
-      "Toronto-based luxury makeup artist for bridal beauty, event glam, editorial shoots, and destination weddings.",
+      "Toronto-based luxury makeup artist for bridal beauty, editorial shoots, event glam, theatre, and creative makeup.",
     type: "website",
     url: "https://glowwithvani.com",
     siteName: "GlowWithVani",
@@ -69,9 +69,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GlowWithVani | Toronto Bridal & Luxury Makeup Artist",
+    title: "GlowWithVani | Toronto Makeup Artist for Bridal, Editorial & Luxury Glam",
     description:
-      "Toronto-based luxury makeup artist for bridal beauty, event glam, editorial shoots, and destination weddings.",
+      "Toronto-based luxury makeup artist for bridal beauty, editorial shoots, event glam, theatre, and creative makeup.",
     images: ["/icon.png"]
   },
   alternates: {

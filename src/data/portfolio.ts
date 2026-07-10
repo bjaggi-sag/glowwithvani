@@ -2,6 +2,7 @@ import { readdirSync, readFileSync } from "fs";
 import path from "path";
 
 const visiblePortfolioTags = ["Bridal", "Reception", "Soft Glam", "Editorial", "Theatre", "Prosthetics", "SFX", "Creature"] as const;
+const balancedAllFeedOrder: PortfolioCategory[] = ["Editorial", "Theatre", "SFX", "Bridal", "Reception", "Prosthetics", "Creature"];
 
 export type PortfolioCategory = (typeof visiblePortfolioTags)[number];
 export type PortfolioInternalTag = string;
@@ -62,7 +63,47 @@ function compareHomepageItems(left: PortfolioItem, right: PortfolioItem) {
   return compareItems(left, right);
 }
 
-function readPortfolioEntries(): PortfolioItem[] {
+function balancePortfolioItems(items: PortfolioItem[], categoryOrder: PortfolioCategory[] = balancedAllFeedOrder): PortfolioItem[] {
+  const queues = new Map<PortfolioCategory, PortfolioItem[]>();
+  const balancedItems: PortfolioItem[] = [];
+
+  for (const category of categoryOrder) {
+    queues.set(category, []);
+  }
+
+  for (const item of items) {
+    const queue = queues.get(item.primaryTag);
+
+    if (queue) {
+      queue.push(item);
+      continue;
+    }
+
+    balancedItems.push(item);
+  }
+
+  let appended = true;
+
+  while (appended) {
+    appended = false;
+
+    for (const category of categoryOrder) {
+      const queue = queues.get(category);
+      const nextItem = queue?.shift();
+
+      if (!nextItem) {
+        continue;
+      }
+
+      balancedItems.push(nextItem);
+      appended = true;
+    }
+  }
+
+  return balancedItems;
+}
+
+function readPortfolioEntriesSorted(): PortfolioItem[] {
   const contentDirectory = getPortfolioContentDirectory();
 
   try {
@@ -94,15 +135,15 @@ function readPortfolioEntries(): PortfolioItem[] {
 }
 
 export function getPortfolioItems(): PortfolioItem[] {
-  return readPortfolioEntries();
+  return balancePortfolioItems(readPortfolioEntriesSorted());
 }
 
 export function getHomepagePortfolioItems(): PortfolioItem[] {
-  const items = readPortfolioEntries();
+  const items = readPortfolioEntriesSorted();
   const featuredItems = items.filter((item) => item.homepageFeature).sort(compareHomepageItems);
 
   if (featuredItems.length > 0) {
-    return featuredItems;
+    return balancePortfolioItems(featuredItems);
   }
 
   const previewCategoryOrder: PortfolioCategory[] = ["Bridal", "Reception", "Editorial", "Theatre", "Prosthetics", "SFX", "Creature"];
@@ -124,7 +165,7 @@ export function getHomepagePortfolioItems(): PortfolioItem[] {
 }
 
 export function getPortfolioCategories(): ("All" | PortfolioCategory)[] {
-  return getPortfolioCategoriesForItems(readPortfolioEntries());
+  return getPortfolioCategoriesForItems(readPortfolioEntriesSorted());
 }
 
 export function getPortfolioCategoriesForItems(items: PortfolioItem[]): ("All" | PortfolioCategory)[] {

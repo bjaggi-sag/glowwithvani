@@ -1,0 +1,19 @@
+{
+  "slug": "sfx-3",
+  "title": "SFX 3",
+  "sourceImage": "/portfolio/originals/sfx-3.jpg",
+  "alt": "Graphic SFX character makeup with monochrome face shaping, dramatic lashes, and a stylized theatrical expression",
+  "displayTags": [
+    "Theatre"
+  ],
+  "internalTags": [
+    "theatre",
+    "character-makeup",
+    "graphic-face-paint",
+    "monochrome-makeup",
+    "dramatic-lashes"
+  ],
+  "primaryTag": "Theatre",
+  "sortOrder": 135,
+  "objectPosition": "center 18%"
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "theatre-3",
+  "title": "Theatre 3",
+  "sourceImage": "/portfolio/originals/theatre-3.jpg",
+  "alt": "Vintage theatre inspired portrait with sculpted glam makeup, pearl styling, dramatic liner, and an old Hollywood mood",
+  "displayTags": [
+    "Theatre",
+    "Editorial"
+  ],
+  "internalTags": [
+    "theatre",
+    "editorial",
+    "vintage-glam",
+    "old-hollywood",
+    "period-styling"
+  ],
+  "primaryTag": "Theatre",
+  "sortOrder": 105,
+  "objectPosition": "center 22%"
+}

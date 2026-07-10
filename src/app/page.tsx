@@ -16,17 +16,20 @@ const processSteps = [
 ];
 
 export const metadata: Metadata = {
-  title: "Toronto Bridal Makeup Artist",
+  title: "Toronto Makeup Artist | Bridal, Editorial & Luxury Glam",
   description:
-    "GlowWithVani is a Toronto-based luxury makeup artist serving the GTA for bridal makeup, event glam, editorial beauty, SFX looks, and destination weddings worldwide.",
+    "GlowWithVani is a Toronto-based luxury makeup artist for bridal beauty, editorial shoots, event glam, theatre, and creative makeup across the GTA and destination weddings worldwide.",
   keywords: [
+    "Toronto makeup artist",
     "bridal makeup artist Toronto",
     "Toronto bridal makeup",
+    "luxury makeup artist Toronto",
+    "Toronto editorial makeup artist",
+    "Toronto event makeup artist",
+    "Toronto theatre makeup artist",
+    "Toronto creative makeup artist",
     "GTA makeup artist",
-    "luxury makeup artist GTA",
     "destination wedding makeup artist",
-    "event makeup Toronto",
-    "editorial makeup artist Toronto",
     "GlowWithVani"
   ],
   alternates: {
@@ -53,7 +56,7 @@ export default function HomePage() {
               <h1 className="hero-brand-title">GlowWithVani</h1>
               <p className="hero-byline">By Gurvani Kaur</p>
               <p className="hero-summary">
-                Toronto bridal makeup artist services for weddings, events, editorial photoshoots, and soft glam with a polished, camera-ready finish.
+                Toronto makeup artist for bridal, editorial, events, theatre, and creative looks with a refined, camera-ready finish.
               </p>
               <p className="hero-credentials">Founder-led artistry with a polished, modern, and timeless finish.</p>
               <div className="hero-actions">
