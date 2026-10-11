@@ -13,19 +13,22 @@ export function PortfolioGrid({
   categories,
   preview = false,
   featuredItems,
-  allHref
+  allHref,
+  hideFilters = false
 }: {
   items: PortfolioItem[];
   categories: FilterKey[];
   preview?: boolean;
   featuredItems?: PortfolioItem[];
   allHref?: string;
+  hideFilters?: boolean;
 }) {
   const [active, setActive] = useState<FilterKey>("All");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [isMounted, setIsMounted] = useState(false);
   const lightboxRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
 
   const filtered = useMemo(() => {
     if (active === "All") {
@@ -36,13 +39,14 @@ export function PortfolioGrid({
   }, [active, featuredItems, items]);
 
   const lightboxItem = lightboxIndex === null ? null : filtered[lightboxIndex] ?? null;
+  const isLightboxOpen = lightboxItem !== null;
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    if (lightboxItem === null) {
+    if (!isLightboxOpen) {
       return;
     }
 
@@ -50,6 +54,18 @@ export function PortfolioGrid({
     document.body.style.overflow = "hidden";
 
     function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Tab") {
+        const buttons = lightboxRef.current?.querySelectorAll<HTMLButtonElement>("button");
+        const first = buttons?.[0];
+        const last = buttons?.[buttons.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }
       if (event.key === "Escape") {
         setLightboxIndex(null);
       }
@@ -77,7 +93,7 @@ export function PortfolioGrid({
 
     window.addEventListener("keydown", handleKeyDown);
 
-    requestAnimationFrame(() => {
+    const frame = requestAnimationFrame(() => {
       if (document.activeElement instanceof HTMLElement) {
         document.activeElement.blur();
       }
@@ -86,12 +102,15 @@ export function PortfolioGrid({
     });
 
     return () => {
+      cancelAnimationFrame(frame);
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
+      openerRef.current?.focus({ preventScroll: true });
     };
-  }, [filtered, lightboxItem]);
+  }, [filtered.length, isLightboxOpen]);
 
   function openLightbox(index: number) {
+    openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setLightboxIndex(index);
   }
 
@@ -121,7 +140,7 @@ export function PortfolioGrid({
 
   return (
     <div>
-      <div className="filters" aria-label="Portfolio categories">
+      {!hideFilters && <div className="filters" role="group" aria-label="Portfolio categories">
         {categories.map((category) => {
           const isActive = active === category;
           if (category === "All" && allHref) {
@@ -137,13 +156,14 @@ export function PortfolioGrid({
               key={category}
               type="button"
               className={`pill ${isActive ? "active" : ""}`}
+              aria-pressed={isActive}
               onClick={() => setActive(category)}
             >
               {category}
             </button>
           );
         })}
-      </div>
+      </div>}
       <div className="portfolio-grid">
         {filtered.map((item, index) => (
           <article key={item.id} className="portfolio-card card">
@@ -156,7 +176,7 @@ export function PortfolioGrid({
                   height={1100}
                   quality={92}
                   sizes={preview ? "(max-width: 767px) 100vw, 50vw" : "(max-width: 767px) 100vw, (max-width: 1200px) 50vw, 33vw"}
-                  priority={preview || index < 1}
+                  priority={index < 2}
                   className="portfolio-image"
                   style={{ objectPosition: item.objectPosition ?? "center" }}
                 />

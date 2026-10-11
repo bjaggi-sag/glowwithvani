@@ -1,40 +1,44 @@
 import type { Metadata } from "next";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ContactForm } from "@/components/ContactForm";
-import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Contact GlowWithVani to book bridal makeup, event glam, editorial makeup, or destination wedding makeup in Toronto, the GTA, and worldwide.",
+  description:
+    "Contact Toronto makeup artist Gurvani Kaur for film, music video, editorial, theatre, SFX, bridal, and event makeup. Share your production brief or booking details.",
   keywords: [
     "book makeup artist Toronto",
     "contact bridal makeup artist Toronto",
     "destination wedding makeup booking",
     "GTA makeup artist inquiry",
-    "GlowWithVani contact"
+    "GlowWithVani contact",
   ],
   alternates: {
-    canonical: "/contact/"
-  }
+    canonical: "/contact/",
+  },
 };
 
 export default function ContactPage() {
   return (
-    <main className="section">
-      <Reveal className="container contact-layout">
+    <main id="main-content" className="section">
+      <div className="container contact-layout">
         <div>
           <SectionHeading
             kicker="Contact"
-            title="Book your glam session"
-            copy="Share your event details and desired look. Replies are typically sent within 24-48 hours."
+            title="Let's create something memorable."
+            copy="A creative brief, a character, or a special occasion. Tell Gurvani what you have in mind. Replies are typically sent within 24-48 hours."
           />
           <p className="section-copy">
-            Serving Toronto and the GTA. Bridal, editorial/photoshoots, party glam, and SFX bookings available.
+            Serving Toronto and the GTA. Editorial, film and video, theatre,
+            SFX, bridal, and event bookings. Production quotes are tailored to
+            your project.
           </p>
-          <p className="section-copy">Available for destination weddings and open to worldwide travel.</p>
+          <p className="section-copy">
+            Available for destination weddings and open to worldwide travel.
+          </p>
         </div>
         <ContactForm />
-      </Reveal>
+      </div>
     </main>
   );
 }

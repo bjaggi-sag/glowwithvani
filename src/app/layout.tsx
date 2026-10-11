@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import "./work.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
@@ -19,11 +20,11 @@ const serif = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL("https://glowwithvani.com"),
   title: {
-    default: "GlowWithVani | Toronto Makeup Artist for Bridal, Editorial & Luxury Glam",
+    default: "GlowWithVani | Toronto Makeup Artist | Editorial, Film & Bridal",
     template: "%s | GlowWithVani"
   },
   description:
-    "GlowWithVani is a Toronto-based luxury makeup artist for bridal beauty, editorial shoots, event glam, theatre, and creative makeup across the GTA and destination weddings.",
+    "Makeup artistry by Gurvani Kaur in Toronto and the GTA. Editorial and fashion, film and music videos, theatre, SFX, refined bridal beauty, and events.",
   keywords: [
     "Toronto makeup artist",
     "makeup artist Toronto",
@@ -51,9 +52,9 @@ export const metadata: Metadata = {
     telephone: false
   },
   openGraph: {
-    title: "GlowWithVani | Toronto Makeup Artist for Bridal, Editorial & Luxury Glam",
+    title: "GlowWithVani | Toronto Makeup Artist | Editorial, Film & Bridal",
     description:
-      "Toronto-based luxury makeup artist for bridal beauty, editorial shoots, event glam, theatre, and creative makeup.",
+      "Toronto makeup artistry for editorial, film, music videos, theatre, SFX, bridal, and events.",
     type: "website",
     url: "https://glowwithvani.com",
     siteName: "GlowWithVani",
@@ -69,9 +70,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GlowWithVani | Toronto Makeup Artist for Bridal, Editorial & Luxury Glam",
+    title: "GlowWithVani | Toronto Makeup Artist | Editorial, Film & Bridal",
     description:
-      "Toronto-based luxury makeup artist for bridal beauty, editorial shoots, event glam, theatre, and creative makeup.",
+      "Toronto makeup artistry for editorial, film, music videos, theatre, SFX, bridal, and events.",
     images: ["/icon.png"]
   },
   alternates: {

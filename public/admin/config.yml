@@ -50,6 +50,7 @@ collections:
             - Reception
             - Soft Glam
             - Editorial
+            - Film & Video
             - Theatre
             - Prosthetics
             - SFX
@@ -75,6 +76,7 @@ collections:
           - Reception
           - Soft Glam
           - Editorial
+          - Film & Video
           - Theatre
           - Prosthetics
           - SFX
@@ -101,3 +103,90 @@ collections:
         value_type: int
         required: false
         hint: Lower numbers appear first in the homepage preview when Homepage Feature is enabled.
+
+  - name: projects
+    label: Screen & Print Projects
+    label_singular: Project
+    folder: content/projects
+    create: true
+    format: json
+    extension: json
+    identifier_field: slug
+    slug: '{{fields.slug}}'
+    summary: '{{fields.title}} / {{fields.releaseStatus}}'
+    fields:
+      - { label: Slug, name: slug, widget: string, pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase kebab-case.'] }
+      - { label: Title, name: title, widget: string }
+      - label: Visible on Website
+        name: published
+        widget: boolean
+        default: false
+        hint: Keep off until credits and all materials are approved for public sharing. Saving still commits to GitHub and may trigger a deployment.
+      - label: Format
+        name: format
+        widget: select
+        options:
+          - { label: Film / Music Video, value: video }
+          - { label: Magazine / Published Editorial, value: publication }
+      - label: Release Status
+        name: releaseStatus
+        widget: select
+        default: released
+        options:
+          - { label: Released, value: released }
+          - { label: Upcoming, value: upcoming }
+      - label: Disciplines
+        name: disciplines
+        widget: select
+        multiple: true
+        options:
+          - { label: Editorial & Fashion, value: editorial }
+          - { label: Film & Video, value: screen }
+          - { label: Theatre & SFX, value: character }
+          - { label: Bridal & Beauty, value: beauty }
+      - { label: Gurvani's Role, name: role, widget: string, default: Makeup artist }
+      - { label: Project Description, name: description, widget: text }
+      - label: YouTube / Publication Link
+        name: url
+        widget: string
+        required: false
+        hint: HTTPS YouTube link required for released videos. Optional for magazines and upcoming projects.
+      - { label: Client / Production, name: client, widget: string, required: false }
+      - label: Magazine / Publication Name
+        name: publication
+        widget: string
+        required: false
+        hint: Required for published editorials. Use the credited publication name.
+      - { label: Issue, name: issue, widget: string, required: false }
+      - { label: Year, name: year, widget: string, required: false }
+      - label: Cover Image
+        name: coverImage
+        widget: image
+        required: false
+        choose_url: false
+        allow_multiple: false
+        hint: Upload approved cover art or a published photograph. Generated WebP copies are used on the website.
+      - label: Cover Alt Text
+        name: coverAlt
+        widget: string
+        required: false
+        hint: Required whenever a cover image is selected.
+      - label: Portfolio Images
+        name: portfolioIds
+        widget: relation
+        collection: portfolio
+        search_fields: [title, slug]
+        value_field: slug
+        display_fields: [title]
+        multiple: true
+        required: false
+        hint: Attach existing photos to this project. A released editorial needs a cover, related image, or external link.
+      - label: Additional Credits
+        name: credits
+        widget: list
+        required: false
+        fields:
+          - { label: Role, name: role, widget: string }
+          - { label: Name, name: name, widget: string }
+      - { label: Homepage Feature, name: featured, widget: boolean, default: false }
+      - { label: Sort Order, name: sortOrder, widget: number, value_type: int, default: 100 }

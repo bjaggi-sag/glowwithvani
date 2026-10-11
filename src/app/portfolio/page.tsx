@@ -1,39 +1,50 @@
 import type { Metadata } from "next";
-import { SectionHeading } from "@/components/SectionHeading";
+import Link from "next/link";
+import { Suspense } from "react";
 import { PortfolioGrid } from "@/components/PortfolioGrid";
-import { getPortfolioCategories, getPortfolioItems } from "@/data/portfolio";
-import { Reveal } from "@/components/Reveal";
+import { WorkExplorer } from "@/components/WorkExplorer";
+import { getPortfolioItems } from "@/data/portfolio";
+import { getWorkProjects } from "@/data/projects";
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Browse GlowWithVani makeup portfolio featuring bridal makeup, editorial beauty, soft glam, SFX, and theatre looks in Toronto and the GTA.",
-  keywords: [
-    "makeup artist portfolio Toronto",
-    "bridal makeup portfolio Toronto",
-    "editorial makeup portfolio",
-    "soft glam makeup portfolio",
-    "SFX makeup portfolio",
-    "theatre makeup portfolio"
-  ],
-  alternates: {
-    canonical: "/portfolio/"
-  }
+  title: "The Work | Editorial, Film, SFX & Bridal Portfolio",
+  description:
+    "Explore Gurvani Kaur's makeup portfolio by discipline: editorial and fashion, film and video, theatre and SFX, bridal and beauty. Watch videos and discover published editorials.",
+  alternates: { canonical: "/portfolio/" },
 };
 
 export default function PortfolioPage() {
-  const portfolioItems = getPortfolioItems();
-  const portfolioCategories = getPortfolioCategories();
-
+  const photos = getPortfolioItems();
   return (
-    <main className="section">
-      <Reveal className="container" threshold={0.01} rootMargin="22% 0px -4% 0px">
-        <SectionHeading
-          kicker="Portfolio"
-          title="Curated makeup looks"
-          copy="Use filters to browse by style category."
-        />
-        <PortfolioGrid items={portfolioItems} categories={portfolioCategories} />
-      </Reveal>
+    <main id="main-content" className="section work-page">
+      <div className="container">
+        <header className="work-page-heading">
+          <div>
+            <p className="section-kicker">The portfolio / Gurvani Kaur</p>
+            <h1>
+              The art of <em>transformation.</em>
+            </h1>
+          </div>
+          <div>
+            <p className="section-copy">
+              Different stories. The same attention to detail. Find the work
+              that fits your vision, from an editorial close-up to a character
+              on screen.
+            </p>
+            <Link href="/contact?type=production" className="text-link">
+              Have a brief? Let&apos;s talk{" "}
+              <span aria-hidden="true">&#8599;</span>
+            </Link>
+          </div>
+        </header>
+        <Suspense
+          fallback={
+            <PortfolioGrid items={photos} categories={[]} hideFilters />
+          }
+        >
+          <WorkExplorer photos={photos} projects={getWorkProjects()} />
+        </Suspense>
+      </div>
     </main>
   );
 }

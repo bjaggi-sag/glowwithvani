@@ -7,6 +7,8 @@ export function SiteFooter() {
       <div className="container inner">
         <p>© GlowWithVani. Toronto & GTA makeup artistry.</p>
         <div className="footer-links">
+          <Link href="/portfolio">Explore the Work</Link>
+          <Link href="/contact?type=production">Production Inquiries</Link>
           <Link href="/toronto-bridal-makeup-artist">Toronto Bridal</Link>
           <Link href="/indian-bridal-makeup-toronto">Indian Bridal</Link>
           <a href="https://instagram.com/GlowWithVanii" target="_blank" rel="noreferrer" className="instagram-link-inline">

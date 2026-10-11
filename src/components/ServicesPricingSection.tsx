@@ -9,8 +9,8 @@ export function ServicesPricingSection() {
       <Reveal className="container">
         <SectionHeading
           kicker="Services"
-          title="Services"
-          copy="Luxury makeup services designed for bridal, event, and editorial beauty."
+          title="A considered look. A personal experience."
+          copy="Explore starting prices for personal beauty and photoshoots. Film, fashion campaigns, theatre, and SFX projects are quoted to suit the brief."
         />
 
         <div className="pricing-grid">

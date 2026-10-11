@@ -1,8 +1,8 @@
 import { readdirSync, readFileSync } from "fs";
 import path from "path";
 
-const visiblePortfolioTags = ["Bridal", "Reception", "Soft Glam", "Editorial", "Theatre", "Prosthetics", "SFX", "Creature"] as const;
-const balancedAllFeedOrder: PortfolioCategory[] = ["Editorial", "Theatre", "SFX", "Bridal", "Reception", "Prosthetics", "Creature"];
+const visiblePortfolioTags = ["Bridal", "Reception", "Soft Glam", "Editorial", "Film & Video", "Theatre", "Prosthetics", "SFX", "Creature"] as const;
+const balancedAllFeedOrder: PortfolioCategory[] = ["Editorial", "Film & Video", "Theatre", "SFX", "Bridal", "Reception", "Prosthetics", "Soft Glam", "Creature"];
 
 export type PortfolioCategory = (typeof visiblePortfolioTags)[number];
 export type PortfolioInternalTag = string;

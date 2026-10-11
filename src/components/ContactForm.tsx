@@ -10,6 +10,9 @@ type InquirySnapshot = {
   name: string;
   email: string;
   eventDate: string;
+  inquiryType: string;
+  organization: string;
+  location: string;
   message: string;
 };
 
@@ -20,6 +23,7 @@ function getTodayLocalDate() {
 }
 
 export function ContactForm() {
+  const [inquiryType, setInquiryType] = useState("General inquiry");
   const [state, setState] = useState<FormStatus>("idle");
   const [minEventDate, setMinEventDate] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -27,17 +31,21 @@ export function ContactForm() {
     name: "",
     email: "",
     eventDate: "",
+    inquiryType: "General inquiry",
+    organization: "",
+    location: "",
     message: ""
   });
 
   useEffect(() => {
     // Compute from the user's local timezone so mobile date pickers enforce the correct minimum date.
     setMinEventDate(getTodayLocalDate());
+    if (new URLSearchParams(window.location.search).get("type") === "production") setInquiryType("Film / video / production");
   }, []);
 
   const fallbackMailtoHref = useMemo(() => {
     const body = encodeURIComponent(
-      `Name: ${snapshot.name}\nEmail: ${snapshot.email}\nEvent Date: ${snapshot.eventDate || "Not provided"}\n\nMessage:\n${snapshot.message}`
+      `Name: ${snapshot.name}\nEmail: ${snapshot.email}\nProject type: ${snapshot.inquiryType}\nCompany / team: ${snapshot.organization || "Not provided"}\nLocation: ${snapshot.location || "Not provided"}\nDate: ${snapshot.eventDate || "Not provided"}\n\nMessage:\n${snapshot.message}`
     );
     return `mailto:${FALLBACK_EMAIL}?subject=GlowWithVani Inquiry&body=${body}`;
   }, [snapshot]);
@@ -55,6 +63,9 @@ export function ContactForm() {
       name: String(formData.get("name") ?? ""),
       email: String(formData.get("email") ?? ""),
       eventDate: String(formData.get("eventDate") ?? ""),
+      inquiryType: String(formData.get("inquiryType") ?? "General inquiry"),
+      organization: String(formData.get("organization") ?? ""),
+      location: String(formData.get("location") ?? ""),
       message: String(formData.get("message") ?? "")
     };
     const eventDate = nextSnapshot.eventDate;
@@ -62,7 +73,7 @@ export function ContactForm() {
     setSnapshot(nextSnapshot);
     setErrorMessage("");
 
-    if (eventDate && minEventDate && eventDate < minEventDate) {
+    if (eventDate && eventDate < getTodayLocalDate()) {
       setState("error");
       setErrorMessage("Please choose today or a future event date.");
       return;
@@ -118,20 +129,34 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="contact-form card">
       <label>
+        I am enquiring about
+        <select name="inquiryType" value={inquiryType} onChange={(event) => { setInquiryType(event.target.value); resetFormState(); }}>
+          {["General inquiry", "Film / video / production", "Editorial / fashion", "Theatre / SFX", "Bridal / wedding", "Event / personal makeup"].map((option) => <option key={option}>{option}</option>)}
+        </select>
+      </label>
+      <label>
         Name
-        <input type="text" name="name" required defaultValue={snapshot.name} onChange={() => state !== "idle" && resetFormState()} />
+        <input type="text" name="name" autoComplete="name" required defaultValue={snapshot.name} onChange={() => state !== "idle" && resetFormState()} />
       </label>
       <label>
         Email
-        <input type="email" name="email" required defaultValue={snapshot.email} onChange={() => state !== "idle" && resetFormState()} />
+        <input type="email" name="email" autoComplete="email" required defaultValue={snapshot.email} onChange={() => state !== "idle" && resetFormState()} />
       </label>
       <label>
-        Event Date (optional)
+        Shoot / event date (optional)
         <input type="date" name="eventDate" min={minEventDate} defaultValue={snapshot.eventDate} onChange={() => state !== "idle" && resetFormState()} />
       </label>
       <label>
-        Message
-        <textarea name="message" rows={6} required defaultValue={snapshot.message} onChange={() => state !== "idle" && resetFormState()} />
+        Company / production team (optional)
+        <input type="text" name="organization" autoComplete="organization" defaultValue={snapshot.organization} onChange={() => state !== "idle" && resetFormState()} />
+      </label>
+      <label>
+        Location (optional)
+        <input type="text" name="location" placeholder="City, venue, or studio" defaultValue={snapshot.location} onChange={() => state !== "idle" && resetFormState()} />
+      </label>
+      <label>
+        Your brief
+        <textarea name="message" placeholder="Tell me about your vision, dates, number of looks or people, and any references. For productions, include the schedule and scope if known." rows={6} required defaultValue={snapshot.message} onChange={() => state !== "idle" && resetFormState()} />
       </label>
       <button type="submit" className="button" disabled={state === "submitting"}>
         {state === "submitting" ? "Sending..." : "Send Inquiry"}
@@ -150,7 +175,7 @@ export function ContactForm() {
         </div>
       ) : null}
       <p className="status">
-        Fallback: <a href={`mailto:${FALLBACK_EMAIL}`}>{FALLBACK_EMAIL}</a>
+        Prefer email? <a href={`mailto:${FALLBACK_EMAIL}`}>{FALLBACK_EMAIL}</a>
       </p>
     </form>
   );

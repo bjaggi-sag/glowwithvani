@@ -16,6 +16,12 @@ export function SiteHeader() {
     setIsMounted(true);
   }, []);
 
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") setIsOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   function closeMenu() {
     setIsOpen(false);
   }
@@ -23,7 +29,7 @@ export function SiteHeader() {
   function toggleTheme() {
     const nextTheme = theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = nextTheme;
-    localStorage.setItem("glowwithvani-theme", nextTheme);
+    try { localStorage.setItem("glowwithvani-theme", nextTheme); } catch { /* Theme still works when storage is unavailable. */ }
     setTheme(nextTheme);
   }
 
@@ -65,15 +71,14 @@ export function SiteHeader() {
         </div>
 
         <nav id="primary-navigation" className={`nav${isOpen ? " open" : ""}`} aria-label="Primary">
+          <Link href="/portfolio" onClick={closeMenu}>The Work</Link>
           <Link href="/#about" onClick={closeMenu}>
             About
           </Link>
           <Link href="/#services" onClick={closeMenu}>
             Services
           </Link>
-          <Link href="/portfolio" onClick={closeMenu}>
-            Portfolio
-          </Link>
+          <Link href="/#screen-print" onClick={closeMenu}>Screen & Print</Link>
           <Link href="/contact" onClick={closeMenu}>
             Contact
           </Link>

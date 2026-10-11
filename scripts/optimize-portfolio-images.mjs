@@ -21,15 +21,19 @@ function readPortfolioEntries() {
   });
 }
 
-async function optimizeEntry(entry) {
+async function optimizeEntry(entry, destination = outputDir) {
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(entry.slug)) throw new Error('Image slug must be kebab-case');
   const relativeSourcePath = String(entry.sourceImage).replace(/^\//, '');
-  const sourcePath = path.join(publicDir, relativeSourcePath);
+  const sourcePath = path.resolve(publicDir, relativeSourcePath);
+  if (!sourcePath.startsWith(path.join(publicDir, 'portfolio', 'originals') + path.sep)) {
+    throw new Error(`Source image must be inside portfolio/originals: ${entry.slug}`);
+  }
 
   if (!existsSync(sourcePath)) {
     throw new Error(`Missing source image for ${entry.slug}: ${sourcePath}`);
   }
 
-  const outputPath = path.join(outputDir, `${entry.slug}.webp`);
+  const outputPath = path.join(destination, `${entry.slug}.webp`);
 
   await sharp(sourcePath)
     .rotate()
@@ -48,6 +52,19 @@ async function main() {
   for (const entry of entries) {
     await optimizeEntry(entry);
     console.log(`Optimized ${entry.slug}`);
+  }
+
+  const projectContent = path.join(rootDir, 'content', 'projects');
+  const projectOutput = path.join(publicDir, 'projects', 'optimized');
+  rmSync(projectOutput, { recursive: true, force: true });
+  mkdirSync(projectOutput, { recursive: true });
+  if (existsSync(projectContent)) {
+    for (const file of readdirSync(projectContent).filter((file) => file.endsWith('.json'))) {
+      const project = JSON.parse(readFileSync(path.join(projectContent, file), 'utf8'));
+      if (project.published !== true || !project.coverImage) continue;
+      await optimizeEntry({ slug: project.slug, sourceImage: project.coverImage }, projectOutput);
+      console.log(`Optimized project cover ${project.slug}`);
+    }
   }
 }
 

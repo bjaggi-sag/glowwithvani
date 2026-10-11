@@ -20,6 +20,7 @@
 *.pem
 tmp/
 public/portfolio/optimized/
+public/projects/optimized/
 
 # debug
 npm-debug.log*
