@@ -7,11 +7,11 @@ import { InstagramIcon } from "@/components/InstagramIcon";
 
 export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const nextTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    const nextTheme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
     setTheme(nextTheme);
     setIsMounted(true);
   }, []);
@@ -47,7 +47,7 @@ export function SiteHeader() {
             type="button"
             className="theme-toggle"
             aria-label="Toggle color theme"
-            aria-pressed={isMounted ? theme === "dark" : false}
+            aria-pressed={theme === "dark"}
             onClick={toggleTheme}
           >
             <span className="theme-toggle-track">

@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/ArrowIcon";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -33,7 +34,7 @@ export default function PortfolioPage() {
             </p>
             <Link href="/contact?type=production" className="text-link">
               Have a brief? Let&apos;s talk{" "}
-              <span aria-hidden="true">&#8599;</span>
+              <ArrowIcon />
             </Link>
           </div>
         </header>

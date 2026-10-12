@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/ArrowIcon";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
@@ -68,10 +69,10 @@ export default function HomePage() {
           </p>
           <div className="hero-actions">
             <Link href="/portfolio" className="button button-solid">
-              Explore the work <span aria-hidden="true">&#8599;</span>
+              Explore the work <ArrowIcon />
             </Link>
             <Link href="/contact" className="text-link">
-              Let&apos;s collaborate <span aria-hidden="true">&#8594;</span>
+              Let&apos;s collaborate <ArrowIcon direction="right" />
             </Link>
           </div>
           <div className="studio-signature">
@@ -105,19 +106,19 @@ export default function HomePage() {
       >
         <Link href="/portfolio?discipline=editorial">
           <span>Editorial & fashion</span>
-          <span aria-hidden="true">&#8599;</span>
+          <ArrowIcon />
         </Link>
         <Link href="/portfolio?discipline=screen">
           <span>Film & video</span>
-          <span aria-hidden="true">&#8599;</span>
+          <ArrowIcon />
         </Link>
         <Link href="/portfolio?discipline=character">
           <span>Theatre & SFX</span>
-          <span aria-hidden="true">&#8599;</span>
+          <ArrowIcon />
         </Link>
         <Link href="/portfolio?discipline=beauty">
           <span>Bridal & beauty</span>
-          <span aria-hidden="true">&#8599;</span>
+          <ArrowIcon />
         </Link>
       </nav>
 
@@ -152,10 +153,10 @@ export default function HomePage() {
               copy="A closer look at the projects behind the artistry. Discover released videos, published stories, and Gurvani's role in each."
             />
             <Link href="/portfolio?format=video" className="text-link">
-              Explore videos <span aria-hidden="true">&#8599;</span>
+              Explore videos <ArrowIcon />
             </Link>
             <Link href="/portfolio?format=publication" className="text-link">
-              Published editorials <span aria-hidden="true">&#8599;</span>
+              Published editorials <ArrowIcon />
             </Link>
           </div>
           <div>
@@ -200,7 +201,7 @@ export default function HomePage() {
               href="/contact?type=production"
               className="button button-solid"
             >
-              Send a project brief <span aria-hidden="true">&#8599;</span>
+              Send a project brief <ArrowIcon />
             </Link>
             <p className="production-smallprint">
               Project-specific quotes / Toronto & GTA

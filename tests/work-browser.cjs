@@ -179,9 +179,10 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3005";
     assert.equal(await page.locator("#primary-navigation").isVisible(), true);
     await page.keyboard.press("Escape");
     assert.equal(await page.locator("#primary-navigation").isVisible(), false);
+    const previousTheme = await page.locator("html").getAttribute("data-theme");
     await page.getByRole("button", { name: "Toggle color theme" }).click();
     await page.reload({ waitUntil: "networkidle" });
-    assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
+    assert.equal(await page.locator("html").getAttribute("data-theme"), previousTheme === "dark" ? "light" : "dark");
     await page.goto(base + "/portfolio/?discipline=editorial", {
       waitUntil: "networkidle",
     });

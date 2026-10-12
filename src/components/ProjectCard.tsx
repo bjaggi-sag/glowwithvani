@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/ArrowIcon";
 import Image from "next/image";
 import Link from "next/link";
 import type { WorkProject } from "@/data/work";
@@ -57,7 +58,7 @@ export function ProjectCard({
                 : "Published editorial"}
           </span>
           <span className="project-card-arrow" aria-hidden="true">
-            &#8599;
+            <ArrowIcon />
           </span>
         </div>
         <div className="project-card-copy">
@@ -71,7 +72,7 @@ export function ProjectCard({
             {project.role} <span aria-hidden="true">/</span> Gurvani Kaur
           </p>
           <span className="text-link">
-            View project & credits <span aria-hidden="true">&#8599;</span>
+            View project & credits <ArrowIcon />
           </span>
         </div>
       </Link>

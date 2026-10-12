@@ -82,11 +82,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var key='glowwithvani-theme';var stored=localStorage.getItem(key);var theme=stored||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=theme;}catch(e){document.documentElement.dataset.theme='light';}})();`
+            __html: `(function(){try{var stored=localStorage.getItem('glowwithvani-theme');document.documentElement.dataset.theme=stored==='light'?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}})();`
           }}
         />
       </head>

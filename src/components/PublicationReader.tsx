@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowIcon } from "@/components/ArrowIcon";
 import { useState } from "react";
 import Image from "next/image";
 import type { WorkProject } from "@/data/work";
@@ -66,7 +67,7 @@ export function PublicationReader({
         target="_blank"
         rel="noopener noreferrer"
       >
-        Open full-size page <span aria-hidden="true">&#8599;</span>
+        Open full-size page <ArrowIcon />
       </a>
     </section>
   );

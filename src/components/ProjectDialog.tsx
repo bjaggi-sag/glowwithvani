@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowIcon } from "@/components/ArrowIcon";
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -111,7 +112,7 @@ export function ProjectDialog({
                 {project.format === "video"
                   ? "Watch on YouTube"
                   : "View publication"}{" "}
-                <span aria-hidden="true">&#8599;</span>
+                <ArrowIcon />
               </a>
             )}
           </div>
@@ -146,7 +147,7 @@ export function ProjectDialog({
           </div>
         )}
         <Link className="button button-solid" href="/contact?type=production">
-          Discuss a similar project <span aria-hidden="true">&#8599;</span>
+          Discuss a similar project <ArrowIcon />
         </Link>
       </div>
     </dialog>
