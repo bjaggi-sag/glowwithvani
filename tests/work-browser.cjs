@@ -109,7 +109,7 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3005";
     await page
       .getByRole("button", { name: "Clear filters", exact: true })
       .click();
-    assert.equal(await page.locator(".portfolio-card").count(), 19);
+    assert.equal(await page.locator(".portfolio-card").count(), 22);
     await page.getByRole("searchbox").fill("definitely-no-such-project");
     await page.locator(".work-empty").waitFor();
     await page
@@ -119,10 +119,10 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3005";
       .getByRole("button", { name: "Theatre & SFX", exact: true })
       .click();
     const characterCount = await page.locator(".portfolio-card").count();
-    assert.ok(characterCount > 0 && characterCount < 19);
+    assert.ok(characterCount > 0 && characterCount < 22);
     await page.goBack();
     await page.waitForFunction(
-      () => document.querySelectorAll(".portfolio-card").length === 19,
+      () => document.querySelectorAll(".portfolio-card").length === 22,
     );
     const photo = page.locator(".portfolio-media-button").nth(5);
     await photo.click();
@@ -192,7 +192,7 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3005";
       .getByRole("link", { name: "The Work", exact: true })
       .click();
     await page.waitForFunction(
-      () => document.querySelectorAll(".portfolio-card").length === 19,
+      () => document.querySelectorAll(".portfolio-card").length === 22,
     );
     await page.goto(base + "/contact/?type=production", {
       waitUntil: "networkidle",

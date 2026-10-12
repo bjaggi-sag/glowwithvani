@@ -200,6 +200,6 @@ test("all publication page sources exist and the existing photo feed stays uncha
   assert.equal(
     fs.readdirSync("content/portfolio").filter((f) => f.endsWith(".json"))
       .length,
-    19,
+    22,
   );
 });
