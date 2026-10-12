@@ -1,0 +1,92 @@
+{
+  "slug": "out-and-out-the-new-era",
+  "title": "The New Era",
+  "format": "publication",
+  "disciplines": [
+    "editorial"
+  ],
+  "role": "Makeup artist",
+  "description": "Makeup by Gurvani Kaur for The New Era, published in OUT-AND-OUT, No. 149, October 2026. Metallic fashion, sculptural silhouettes, and expressive beauty across the cover and editorial pages.",
+  "publication": "OUT-AND-OUT",
+  "issue": "No. 149 / October",
+  "year": "2026",
+  "releaseStatus": "released",
+  "coverImage": "/portfolio/originals/publications/out-and-out-the-new-era/cover.jpg",
+  "coverAlt": "OUT-AND-OUT October 2026 cover for The New Era, with two models in metallic fashion",
+  "pages": [
+    {
+      "image": "/portfolio/originals/publications/out-and-out-the-new-era/page-01.jpg",
+      "alt": "The New Era opening page with a platinum-haired model and the printed creative-team credits"
+    },
+    {
+      "image": "/portfolio/originals/publications/out-and-out-the-new-era/page-02.jpg",
+      "alt": "OUT-AND-OUT editorial portrait of a model in a silver suit and wide-brimmed hat"
+    },
+    {
+      "image": "/portfolio/originals/publications/out-and-out-the-new-era/page-03.jpg",
+      "alt": "The New Era rotated editorial close-up of a model wearing a silver jacket and hat"
+    },
+    {
+      "image": "/portfolio/originals/publications/out-and-out-the-new-era/page-04.jpg",
+      "alt": "OUT-AND-OUT beauty close-up with dark lip colour, silver-toned eye makeup, and leaves across the face"
+    },
+    {
+      "image": "/portfolio/originals/publications/out-and-out-the-new-era/page-05.jpg",
+      "alt": "The New Era fashion portrait featuring platinum hair, smoky eyes, and a sculptural black top"
+    },
+    {
+      "image": "/portfolio/originals/publications/out-and-out-the-new-era/page-06.jpg",
+      "alt": "OUT-AND-OUT paired fashion portrait with platinum hair, a silver suit, and a wide-brimmed hat"
+    },
+    {
+      "image": "/portfolio/originals/publications/out-and-out-the-new-era/page-07.jpg",
+      "alt": "The New Era outdoor editorial with two models in metallic styling beside construction machinery"
+    },
+    {
+      "image": "/portfolio/originals/publications/out-and-out-the-new-era/page-08.jpg",
+      "alt": "OUT-AND-OUT full-length editorial portrait in a pale fur-textured coat and metallic trousers"
+    },
+    {
+      "image": "/portfolio/originals/publications/out-and-out-the-new-era/page-09.jpg",
+      "alt": "The New Era portrait of a platinum-haired model in a metallic green dress beside a tree"
+    }
+  ],
+  "credits": [
+    {
+      "role": "Photography",
+      "name": "Alexander Jacobi"
+    },
+    {
+      "role": "Wardrobe styling",
+      "name": "Romone Lenworth Thomas"
+    },
+    {
+      "role": "Fashion design",
+      "name": "Denise David"
+    },
+    {
+      "role": "Fashion design",
+      "name": "Pearleattadesigns"
+    },
+    {
+      "role": "Agency",
+      "name": "Goodfaces"
+    },
+    {
+      "role": "Agency",
+      "name": "Icon Model Management"
+    },
+    {
+      "role": "Model",
+      "name": "Romone Thomas"
+    },
+    {
+      "role": "Model",
+      "name": "Stella Dada"
+    }
+  ],
+  "portfolioIds": [],
+  "sortOrder": 20,
+  "featured": true,
+  "published": true
+}

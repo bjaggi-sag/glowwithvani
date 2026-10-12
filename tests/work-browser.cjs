@@ -58,7 +58,54 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3005";
     await page
       .getByRole("button", { name: "Published editorials", exact: true })
       .click();
-    await page.locator(".work-empty").waitFor();
+    await page.locator(".project-card-publication").first().waitFor();
+    assert.equal(await page.locator(".project-card-publication").count(), 3);
+    for (const [slug, count] of [
+      ["out-and-out-the-new-era", 10],
+      ["goji-beauty-editorial", 8],
+      ["gezno-coffee-and-contracts", 9],
+    ]) {
+      await page.locator('a.project-card-link[href*="' + slug + '"]').click();
+      await page.locator(".publication-reader").waitFor();
+      assert.equal(
+        await page
+          .getByRole("button", { name: "Previous publication page" })
+          .isDisabled(),
+        true,
+      );
+      assert.equal(
+        await page.locator('.publication-reader [role="status"]').innerText(),
+        "1 / " + count,
+      );
+      for (let index = 1; index < count; index++)
+        await page
+          .getByRole("button", { name: "Next publication page" })
+          .click();
+      assert.equal(
+        await page.locator('.publication-reader [role="status"]').innerText(),
+        count + " / " + count,
+      );
+      assert.equal(
+        await page
+          .getByRole("button", { name: "Next publication page" })
+          .isDisabled(),
+        true,
+      );
+      await page.waitForFunction(() => {
+        const image = document.querySelector(".publication-reader img");
+        return image && image.complete && image.naturalWidth > 0;
+      });
+      assert.equal(
+        await page
+          .locator(".publication-reader img")
+          .evaluate((el) => getComputedStyle(el).objectFit),
+        "contain",
+      );
+      await page
+        .getByRole("button", { name: "Close project", exact: true })
+        .click();
+    }
+
     await page
       .getByRole("button", { name: "Clear filters", exact: true })
       .click();

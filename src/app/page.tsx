@@ -159,10 +159,12 @@ export default function HomePage() {
             </Link>
           </div>
           <div>
-            {projects.length ? (
-              projects.map((project) => (
-                <ProjectCard key={project.slug} project={project} />
-              ))
+            {projects.some((project) => project.format === "video") ? (
+              projects
+                .filter((project) => project.format === "video")
+                .map((project) => (
+                  <ProjectCard key={project.slug} project={project} />
+                ))
             ) : (
               <p className="section-copy">
                 Project stories will be shared here as approved work becomes
@@ -170,6 +172,13 @@ export default function HomePage() {
               </p>
             )}
           </div>
+        </div>
+        <div className="container publication-feature-grid">
+          {projects
+            .filter((project) => project.format === "publication")
+            .map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
         </div>
       </section>
 

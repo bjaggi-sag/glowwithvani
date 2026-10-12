@@ -171,6 +171,15 @@ collections:
         widget: string
         required: false
         hint: Required whenever a cover image is selected.
+      - label: Published Pages
+        name: pages
+        widget: list
+        required: false
+        summary: '{{fields.alt}}'
+        hint: Add pages in reading order, excluding the cover above. Preserve the original published layout and credits.
+        fields:
+          - { label: Page Image, name: image, widget: image, choose_url: false, allow_multiple: false }
+          - { label: Page Alt Text, name: alt, widget: string }
       - label: Portfolio Images
         name: portfolioIds
         widget: relation

@@ -29,6 +29,14 @@ export function getWorkProjects(): WorkProject[] {
           throw new Error(`${file}: cover image is missing`);
         project.coverImage = `/projects/optimized/${project.slug}.webp`;
       }
+      project.pages = project.pages.map((page, index) => {
+        if (!existsSync(path.join(process.cwd(), "public", page.image)))
+          throw new Error(`${file}: publication page ${index + 1} is missing`);
+        return {
+          ...page,
+          image: `/projects/optimized/${project.slug}-page-${index + 1}.webp`,
+        };
+      });
       return [project];
     })
     .sort(

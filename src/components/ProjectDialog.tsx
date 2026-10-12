@@ -6,6 +6,7 @@ import Link from "next/link";
 import type { WorkProject } from "@/data/work";
 import type { PortfolioItem } from "@/data/portfolio";
 import { YouTubePlayer } from "./YouTubePlayer";
+import { PublicationReader } from "./PublicationReader";
 
 export function ProjectDialog({
   project,
@@ -69,6 +70,22 @@ export function ProjectDialog({
             url={project.url}
             title={project.title}
             poster={project.coverImage}
+          />
+        ) : project.format === "publication" &&
+          (project.coverImage || project.pages.length > 0) ? (
+          <PublicationReader
+            title={project.title}
+            pages={[
+              ...(project.coverImage
+                ? [
+                    {
+                      image: project.coverImage,
+                      alt: project.coverAlt ?? project.title,
+                    },
+                  ]
+                : []),
+              ...project.pages,
+            ]}
           />
         ) : project.coverImage ? (
           <Image

@@ -1,0 +1,56 @@
+{
+  "slug": "goji-beauty-editorial",
+  "title": "Before the Red Carpet",
+  "format": "publication",
+  "disciplines": [
+    "editorial"
+  ],
+  "role": "Makeup artist",
+  "description": "Makeup by Gurvani Kaur for Before the Red Carpet in GOJI. A vintage-inspired beauty and fashion story featuring defined eyes, rich lip colour, satin, and pearls, presented in colour and black-and-white published portraits.",
+  "publication": "GOJI",
+  "issue": "No. 210",
+  "year": "2026",
+  "releaseStatus": "released",
+  "coverImage": "/portfolio/originals/publications/goji-beauty-editorial/cover.jpg",
+  "coverAlt": "GOJI published portrait of a model in satin, pearls, long black gloves, and a pale stole",
+  "pages": [
+    {
+      "image": "/portfolio/originals/publications/goji-beauty-editorial/title-and-credits.jpg",
+      "alt": "Before the Red Carpet title and creative-team credits in GOJI, printed page 34"
+    },
+    {
+      "image": "/portfolio/originals/publications/goji-beauty-editorial/page-01.jpg",
+      "alt": "GOJI colour beauty portrait with sculpted waves, smoky eye makeup, and deep red lips"
+    },
+    {
+      "image": "/portfolio/originals/publications/goji-beauty-editorial/page-02.jpg",
+      "alt": "GOJI black-and-white editorial portrait of a model with pearls holding a rotary telephone"
+    },
+    {
+      "image": "/portfolio/originals/publications/goji-beauty-editorial/page-03.jpg",
+      "alt": "GOJI black-and-white full-length fashion portrait of a model seated on a stool"
+    },
+    {
+      "image": "/portfolio/originals/publications/goji-beauty-editorial/page-04.jpg",
+      "alt": "GOJI black-and-white beauty close-up with defined eyeliner, sculpted waves, and a black neck scarf"
+    },
+    {
+      "image": "/portfolio/originals/publications/goji-beauty-editorial/page-05.jpg",
+      "alt": "GOJI black-and-white mirror portrait of a model holding a vintage telephone"
+    },
+    {
+      "image": "/portfolio/originals/publications/goji-beauty-editorial/page-06.jpg",
+      "alt": "GOJI black-and-white full-length portrait in an evening dress and long gloves"
+    }
+  ],
+  "credits": [
+    { "role": "Photography", "name": "Tayo Maven" },
+    { "role": "Wardrobe styling", "name": "Mona Farhat" },
+    { "role": "Model", "name": "Aniah-Elizabeth James" },
+    { "role": "Model", "name": "Simryn Mathur" }
+  ],
+  "portfolioIds": [],
+  "sortOrder": 30,
+  "featured": true,
+  "published": true
+}

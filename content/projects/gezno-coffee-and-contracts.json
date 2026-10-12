@@ -1,0 +1,78 @@
+{
+  "slug": "gezno-coffee-and-contracts",
+  "title": "Coffee and Contracts",
+  "format": "publication",
+  "disciplines": [
+    "editorial"
+  ],
+  "role": "Makeup artist",
+  "description": "Makeup by Gurvani Kaur for Coffee and Contracts in GEZNO Magazine. An urban fashion editorial pairing polished beauty with tailored looks, city streets, and waterfront settings.",
+  "publication": "GEZNO Magazine",
+  "releaseStatus": "released",
+  "coverImage": "/portfolio/originals/publications/gezno-coffee-and-contracts/cover.jpg",
+  "coverAlt": "Coffee and Contracts title portrait in GEZNO Magazine, featuring a model in a cream jacket at a city crossing",
+  "pages": [
+    {
+      "image": "/portfolio/originals/publications/gezno-coffee-and-contracts/page-01.jpg",
+      "alt": "GEZNO Coffee and Contracts opening title page with the printed creative-team credits"
+    },
+    {
+      "image": "/portfolio/originals/publications/gezno-coffee-and-contracts/page-02.jpg",
+      "alt": "GEZNO editorial portrait of a model seated on outdoor steps in a checked dress and dark coat"
+    },
+    {
+      "image": "/portfolio/originals/publications/gezno-coffee-and-contracts/page-03.jpg",
+      "alt": "Coffee and Contracts full-length fashion portrait with a checked outfit and burgundy accessories"
+    },
+    {
+      "image": "/portfolio/originals/publications/gezno-coffee-and-contracts/page-04.jpg",
+      "alt": "GEZNO published fashion page pairing a full-length checked outfit with a closer beauty portrait"
+    },
+    {
+      "image": "/portfolio/originals/publications/gezno-coffee-and-contracts/page-05.jpg",
+      "alt": "Coffee and Contracts published page with two cream-jacket portraits in an urban garden"
+    },
+    {
+      "image": "/portfolio/originals/publications/gezno-coffee-and-contracts/page-06.jpg",
+      "alt": "GEZNO editorial photograph of a model in a cream outfit walking toward a waterfront crossing"
+    },
+    {
+      "image": "/portfolio/originals/publications/gezno-coffee-and-contracts/page-07.jpg",
+      "alt": "Coffee and Contracts street-style photograph with a model in a yellow dress and cream jacket at a crossing"
+    },
+    {
+      "image": "/portfolio/originals/publications/gezno-coffee-and-contracts/page-08.jpg",
+      "alt": "GEZNO editorial portrait of a model in a light textured dress and black boots on an indoor staircase"
+    }
+  ],
+  "credits": [
+    {
+      "role": "Wardrobe styling / Creative direction",
+      "name": "Romone Thomas"
+    },
+    {
+      "role": "Photography",
+      "name": "Fardeen Hossain"
+    },
+    {
+      "role": "Model",
+      "name": "Francene Sterling"
+    },
+    {
+      "role": "Modeling agency",
+      "name": "Orange Model Management Inc."
+    },
+    {
+      "role": "Wardrobe stylist / Assistant",
+      "name": "Chloe Aliya"
+    },
+    {
+      "role": "Fashion design",
+      "name": "Denise David"
+    }
+  ],
+  "portfolioIds": [],
+  "sortOrder": 40,
+  "featured": true,
+  "published": true
+}

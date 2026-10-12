@@ -61,9 +61,15 @@ async function main() {
   if (existsSync(projectContent)) {
     for (const file of readdirSync(projectContent).filter((file) => file.endsWith('.json'))) {
       const project = JSON.parse(readFileSync(path.join(projectContent, file), 'utf8'));
-      if (project.published !== true || !project.coverImage) continue;
-      await optimizeEntry({ slug: project.slug, sourceImage: project.coverImage }, projectOutput);
-      console.log(`Optimized project cover ${project.slug}`);
+      if (project.published !== true) continue;
+      if (project.coverImage) {
+        await optimizeEntry({ slug: project.slug, sourceImage: project.coverImage }, projectOutput);
+        console.log(`Optimized project cover ${project.slug}`);
+      }
+      for (const [index, page] of (project.pages ?? []).entries()) {
+        await optimizeEntry({ slug: `${project.slug}-page-${index + 1}`, sourceImage: page.image }, projectOutput);
+      }
+      if (project.pages?.length) console.log(`Optimized ${project.pages.length} pages for ${project.slug}`);
     }
   }
 }

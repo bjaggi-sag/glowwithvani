@@ -30,6 +30,7 @@ export type WorkProject = {
   releaseStatus: "released" | "upcoming";
   coverImage?: string;
   coverAlt?: string;
+  pages: { image: string; alt: string }[];
   credits: { role: string; name: string }[];
   portfolioIds: string[];
   sortOrder: number;
@@ -82,6 +83,14 @@ export function matchesDiscipline(
   return (matches[discipline] ?? []).some((tag) => tags.includes(tag));
 }
 
+export function isProjectImagePath(value: string): boolean {
+  return (
+    /^\/portfolio\/originals\/[a-zA-Z0-9_./ -]+\.(png|jpe?g|webp)$/i.test(
+      value,
+    ) && !value.includes("..")
+  );
+}
+
 // Fail a build on invalid published credits instead of silently dropping a project.
 export function parseProject(input: unknown, source: string): WorkProject {
   const fail = (field: string): never => {
@@ -121,16 +130,23 @@ export function parseProject(input: unknown, source: string): WorkProject {
   )
     fail("disciplines");
   const coverImage = optional("coverImage");
-  if (
-    coverImage &&
-    (!/^\/portfolio\/originals\/[a-zA-Z0-9_./ -]+\.(png|jpe?g|webp)$/i.test(
-      coverImage,
-    ) ||
-      coverImage.includes(".."))
-  )
+  if (coverImage && !isProjectImagePath(coverImage))
     fail("coverImage (local image in /portfolio/originals/)");
   const coverAlt = optional("coverAlt");
   if (coverImage && !coverAlt) fail("coverAlt");
+  const pages = record.pages ?? [];
+  if (
+    !Array.isArray(pages) ||
+    pages.some(
+      (page) =>
+        !page ||
+        typeof page.image !== "string" ||
+        !isProjectImagePath(page.image) ||
+        typeof page.alt !== "string" ||
+        !page.alt.trim(),
+    )
+  )
+    fail("pages (local image and alt text required)");
   const publication = optional("publication");
   if (format === "publication" && !publication) fail("publication");
   const credits = record.credits ?? [];
@@ -157,6 +173,7 @@ export function parseProject(input: unknown, source: string): WorkProject {
     releaseStatus === "released" &&
     !url &&
     !coverImage &&
+    !(pages as WorkProject["pages"]).length &&
     !(portfolioIds as string[]).length
   )
     fail("publication image or link");
@@ -184,6 +201,7 @@ export function parseProject(input: unknown, source: string): WorkProject {
     year: optional("year"),
     coverImage,
     coverAlt,
+    pages: pages as WorkProject["pages"],
     credits: credits as WorkProject["credits"],
     portfolioIds: portfolioIds as string[],
     sortOrder: (record.sortOrder as number | undefined) ?? 100,

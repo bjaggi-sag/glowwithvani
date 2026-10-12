@@ -149,3 +149,57 @@ test("published repository projects validate and reference existing photos", () 
   assert.equal(slugs.has("photo-hustinder"), true);
   assert.equal(slugs.has("upcoming-punjabi-feature"), false);
 });
+
+test("publication pages accept local images with alt text, including without a cover or link", () => {
+  const publication = {
+    ...video,
+    format: "publication",
+    url: undefined,
+    publication: "GOJI",
+    pages: [
+      {
+        image: "/portfolio/originals/publications/test/page.jpg",
+        alt: "Published portrait",
+      },
+    ],
+  };
+  assert.equal(parseProject(publication, "pages").pages.length, 1);
+  for (const pages of [
+    [{ image: "https://example.com/page.jpg", alt: "Portrait" }],
+    [{ image: "/portfolio/originals/../private.jpg", alt: "Portrait" }],
+    [{ image: "/portfolio/originals/page.jpg", alt: "" }],
+    "invalid",
+  ]) {
+    assert.throws(
+      () => parseProject({ ...publication, pages }, "invalid pages"),
+      /pages/,
+    );
+  }
+});
+test("all publication page sources exist and the existing photo feed stays unchanged", () => {
+  const expected = {
+    "out-and-out-the-new-era": 10,
+    "goji-beauty-editorial": 8,
+    "gezno-coffee-and-contracts": 9,
+  };
+  for (const [slug, count] of Object.entries(expected)) {
+    const project = parseProject(
+      JSON.parse(fs.readFileSync(`content/projects/${slug}.json`, "utf8")),
+      slug,
+    );
+    assert.equal(project.pages.length + 1, count);
+    assert.equal(project.role, "Makeup artist");
+    assert.equal(fs.existsSync("public" + project.coverImage), true);
+    const sources = [project.coverImage, ...project.pages.map((p) => p.image)];
+    assert.equal(new Set(sources).size, count);
+    project.pages.forEach((page) =>
+      assert.equal(fs.existsSync("public" + page.image), true),
+    );
+    assert.equal(project.url, undefined);
+  }
+  assert.equal(
+    fs.readdirSync("content/portfolio").filter((f) => f.endsWith(".json"))
+      .length,
+    19,
+  );
+});

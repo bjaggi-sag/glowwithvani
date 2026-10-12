@@ -74,3 +74,15 @@ python3 -m http.server 3005 --bind 127.0.0.1 --directory out
 `npx next build` is useful when testing the site without regenerating existing pricing documents; the normal `npm run build` still prepares all assets.
 
 With Playwright available and Chrome installed, run `node tests/work-browser.cjs` against the preview. Set `PLAYWRIGHT_MODULE` to an existing Playwright module path if it is outside this project, and `TEST_BASE_URL` to use another local port. Tests cover filtering, deep links, history, video opt-in, lightbox focus, mobile/tablet/desktop layouts, theme persistence, and inquiry form success/error flows. Form and video requests are intercepted; the tests never send a real inquiry.
+
+### Published page collections
+
+Projects can include a `pages` list of `{ "image": "/portfolio/originals/...jpg", "alt": "Description" }` objects in reading order. Do not repeat the cover in this list. Originals are copied without edits; generated pages use `/projects/optimized/<slug>-page-<number>.webp`. The reader preserves the complete page, offers previous/next controls, and links to the full-size optimized page. Publication pages do not become standalone photo-feed entries.
+
+The current local publication selection contains:
+
+- **OUT-AND-OUT / The New Era:** 10 supplied pages, including the cover and credit page. No. 149, October 2026, as printed on the cover.
+- **GOJI / Before the Red Carpet:** No. 210, 2026, confirmed by the supplied issue cover. Includes 8 editorial pages, including the title and credits on printed page 34. The issue cover is a reference only, not attributed to Gurvani or included in her work gallery. The existing `goji-beauty-editorial` slug is retained so preview links continue to work.
+- **GEZNO Magazine / Coffee and Contracts:** 9 supplied portrait pages. Six overlapping two-page exports were omitted to avoid repeating images. The magazine's spelling follows its printed masthead, despite the source folder being named `GenZo`.
+
+Credits are transcribed only where readable in the supplied pages. No issue/year or collaborator names have been invented for GOJI or GEZNO.
