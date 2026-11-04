@@ -8,12 +8,10 @@ import { InstagramIcon } from "@/components/InstagramIcon";
 export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     const nextTheme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
     setTheme(nextTheme);
-    setIsMounted(true);
   }, []);
 
   useEffect(() => {
@@ -38,7 +36,7 @@ export function SiteHeader() {
       <div className="container inner">
         <Link href="/" className="brand brand-wrap" aria-label="GlowWithVani home">
           <Image src="/brand/logo.png" alt="GlowWithVani logo" width={44} height={44} className="brand-logo brand-logo-nav brand-logo-light" />
-          <Image src="/brand/logo-dark.png" alt="GlowWithVani logo" width={44} height={44} className="brand-logo brand-logo-nav brand-logo-dark" />
+          <Image src="/brand/logo-dark-transparent.png" alt="GlowWithVani logo" width={44} height={44} className="brand-logo brand-logo-nav brand-logo-dark" />
           <span className="brand-wordmark">GlowWithVani</span>
         </Link>
 
@@ -53,7 +51,7 @@ export function SiteHeader() {
             <span className="theme-toggle-track">
               <span className="theme-toggle-thumb" />
             </span>
-            <span className="theme-toggle-label">{isMounted ? (theme === "dark" ? "Dark" : "Light") : "Theme"}</span>
+            <span className="theme-toggle-label">{theme === "dark" ? "Dark" : "Light"}</span>
           </button>
 
           <button

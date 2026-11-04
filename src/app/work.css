@@ -50,42 +50,44 @@
 }
 .studio-hero {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: 0.95fr 1.05fr;
   align-items: center;
-  gap: 4rem;
-  padding-top: 3.5rem;
-  padding-bottom: 3rem;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  min-height: calc(100svh - 4.5rem);
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 .studio-hero-copy {
-  padding: 1.5rem 0;
+  padding: 1rem 0;
 }
 .studio-hero h1 {
   font-family: var(--font-serif), serif;
   font-weight: 400;
-  font-size: clamp(3rem, 5.8vw, 5rem);
-  line-height: 1.07;
+  font-size: clamp(3.3rem, 6.2vw, 5.7rem);
+  line-height: 1.01;
   letter-spacing: -0.055em;
-  margin: 1.8rem 0;
+  margin: 1.35rem 0;
 }
 .studio-hero h1 em,
 .production-note h2 em,
 .work-page-heading h1 em {
   font-weight: 400;
+  font-style: normal;
   color: var(--accent);
 }
 .studio-hero-description {
-  max-width: 36ch;
-  line-height: 1.8;
+  max-width: 38ch;
+  line-height: 1.75;
   color: var(--muted);
   font-size: 1rem;
 }
 .studio-hero .hero-actions {
-  margin-top: 2rem;
-  gap: 1.5rem;
+  margin-top: 2.25rem;
+  gap: 1.25rem;
 }
 .studio-signature {
-  margin-top: 3.5rem;
-  padding-top: 1.5rem;
+  margin-top: 3rem;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--line);
 }
 .studio-signature > span {
@@ -95,42 +97,41 @@
 .studio-signature p {
   color: var(--muted);
   font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.08em;
   margin: 0.5rem 0 0;
 }
 .studio-hero-image {
   position: relative;
   margin: 0;
   background: var(--surface-soft);
+  border-left: 1px solid var(--line);
 }
 .studio-hero-image img {
-  height: clamp(420px, 44vw, 570px);
+  height: min(68svh, 650px);
   object-fit: cover;
 }
 .studio-hero-image figcaption {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem 0;
-  background: var(--bg);
+  padding: 0.8rem 0;
+  background: transparent;
   color: var(--muted);
   font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.08em;
 }
 .discipline-index {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-block: 1px solid var(--line-strong);
+  border-block: 1px solid var(--line);
 }
 .discipline-index a {
-  padding: 1.5rem 1rem;
+  padding: 1.35rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   border-right: 1px solid var(--line);
 }
 .discipline-index a:last-child {
@@ -150,13 +151,13 @@
 }
 .screen-print-section {
   background: var(--surface-soft);
-  border-block: 1px solid var(--line);
+  border-block: 0;
 }
 .screen-print-layout {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
   align-items: center;
-  gap: 5rem;
+  gap: clamp(2.5rem, 7vw, 6rem);
 }
 .screen-print-intro .text-link {
   display: flex;
@@ -171,8 +172,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 4rem;
+  border-top: 1px solid var(--line-strong);
   border-bottom: 1px solid var(--line-strong);
-  padding-bottom: 4rem;
+  padding: 3rem 0;
 }
 .production-note > .section-kicker {
   grid-column: 1 / -1;
@@ -196,7 +198,7 @@
 .work-page-heading {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  gap: 4rem;
+  gap: clamp(2.5rem, 6vw, 5rem);
   align-items: end;
   margin: 1rem 0 3rem;
 }
@@ -212,8 +214,8 @@
   margin-top: 0;
 }
 .work-controls {
-  border-block: 1px solid var(--line-strong);
-  padding: 1.25rem 0;
+  border-block: 1px solid var(--line);
+  padding: 1.5rem 0;
 }
 .work-discipline-filters {
   display: flex;
@@ -226,7 +228,7 @@
   color: var(--ink);
   font: inherit;
   font-size: 0.8rem;
-  border-radius: 2px;
+  border-radius: 0;
   min-height: 44px;
   padding: 0.7rem 1rem;
   cursor: pointer;
@@ -235,9 +237,9 @@
   border-color: var(--accent);
 }
 .work-filter.selected {
-  background: var(--ink);
-  color: var(--bg);
-  border-color: var(--ink);
+  background: var(--accent);
+  color: #18130d;
+  border-color: var(--accent);
 }
 .work-controls-bottom {
   display: flex;
@@ -269,7 +271,7 @@
 .work-search input {
   width: 100%;
   border: 1px solid var(--line-strong);
-  border-radius: 2px;
+  border-radius: 0;
   background: var(--surface);
   color: var(--ink);
   padding: 0.8rem;
@@ -294,8 +296,8 @@
 .project-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 3rem 2rem;
+  margin-bottom: 3rem;
 }
 .project-card {
   min-width: 0;
@@ -337,8 +339,8 @@
   left: 1.25rem;
   top: 1.25rem;
   font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-transform: none;
   padding: 0.5rem 0.75rem;
   border: 1px solid #e5d4b75c;
   color: #fff7eb;
@@ -349,7 +351,7 @@
   right: 1.25rem;
   bottom: 1.25rem;
   border: 1px solid #e5d4b799;
-  border-radius: 50%;
+  border-radius: 0;
   width: 44px;
   height: 44px;
   display: grid;
@@ -364,7 +366,7 @@
 }
 .project-card-copy h3 {
   font-family: var(--font-serif), serif;
-  font-size: 1.8rem;
+  font-size: clamp(1.55rem, 2.4vw, 2rem);
   font-weight: 400;
   margin: 0;
 }
@@ -536,6 +538,7 @@
   .studio-hero {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    min-height: 0;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
   }
