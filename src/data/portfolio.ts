@@ -135,7 +135,14 @@ function readPortfolioEntriesSorted(): PortfolioItem[] {
 }
 
 export function getPortfolioItems(): PortfolioItem[] {
-  return balancePortfolioItems(readPortfolioEntriesSorted());
+  const items = readPortfolioEntriesSorted();
+  const opening = items.filter((item) => item.primaryTag === "Editorial").slice(0, 8);
+  const openingIds = new Set(opening.map((item) => item.id));
+
+  return [
+    ...opening,
+    ...balancePortfolioItems(items.filter((item) => !openingIds.has(item.id)))
+  ];
 }
 
 export function getHomepagePortfolioItems(): PortfolioItem[] {
