@@ -6,7 +6,16 @@
   "primaryTag": "Editorial",
   "objectPosition": "center 25%",
   "sortOrder": 15,
-  "displayTags": ["Editorial"],
-  "internalTags": ["editorial-makeup", "beauty-editorial", "black-and-white", "studio-makeup", "fashion-editorial"],
-  "homepageFeature": false
+  "displayTags": [
+    "Editorial"
+  ],
+  "internalTags": [
+    "editorial-makeup",
+    "beauty-editorial",
+    "black-and-white",
+    "studio-makeup",
+    "fashion-editorial"
+  ],
+  "homepageFeature": true,
+  "homepageOrder": 3
 }

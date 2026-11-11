@@ -6,7 +6,7 @@
   "primaryTag": "Editorial",
   "objectPosition": "center 32%",
   "sortOrder": 5,
-  "homepageFeature": false,
+  "homepageFeature": true,
   "displayTags": [
     "Editorial"
   ],
@@ -18,5 +18,6 @@
     "hat-editorial",
     "pearl-jewelry",
     "berry-eye-makeup"
-  ]
+  ],
+  "homepageOrder": 1
 }

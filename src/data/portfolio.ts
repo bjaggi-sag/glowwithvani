@@ -150,7 +150,7 @@ export function getHomepagePortfolioItems(): PortfolioItem[] {
   const featuredItems = items.filter((item) => item.homepageFeature).sort(compareHomepageItems);
 
   if (featuredItems.length > 0) {
-    return balancePortfolioItems(featuredItems);
+    return featuredItems;
   }
 
   const previewCategoryOrder: PortfolioCategory[] = ["Bridal", "Reception", "Editorial", "Theatre", "Prosthetics", "SFX", "Creature"];

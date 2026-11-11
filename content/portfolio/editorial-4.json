@@ -16,5 +16,7 @@
   ],
   "primaryTag": "Editorial",
   "sortOrder": 25,
-  "objectPosition": "center 24%"
+  "objectPosition": "center 24%",
+  "homepageFeature": true,
+  "homepageOrder": 5
 }
