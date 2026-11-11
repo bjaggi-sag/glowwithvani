@@ -159,7 +159,7 @@ export default function HomePage() {
               Published editorials <ArrowIcon />
             </Link>
           </div>
-          <div>
+          <div className="homepage-video-grid">
             {projects.some((project) => project.format === "video") ? (
               projects
                 .filter((project) => project.format === "video")
